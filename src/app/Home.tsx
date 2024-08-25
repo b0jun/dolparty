@@ -1,4 +1,5 @@
 'use client';
+
 import cn from 'classnames';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
@@ -54,7 +55,7 @@ export default function Home() {
                     replace
                     className={cn(
                       '-ms-px flex h-[35px] w-[45px] items-center justify-center gap-x-2 border border-gray-200 bg-white/70 text-[14px] hover:bg-gray-50 focus:z-10 focus:outline-none group-first:ms-0 group-first:rounded-s-lg group-last:rounded-e-lg',
-                      { ['!bg-white !font-semibold']: currentType === item },
+                      { '!bg-white !font-semibold': currentType === item },
                     )}
                   >
                     {item === 'all' ? '전체' : item.toUpperCase()}
@@ -73,12 +74,12 @@ export default function Home() {
           </div>
           <table className="text-md mx-auto mb-4 w-full table-fixed rounded-lg bg-white/50 shadow-md">
             <thead>
-              <tr className={cn('sticky top-0 bg-white/60', { ['!bg-white']: isScrollTop })} ref={headerRef}>
-                <th className={cn('[50px] px-2 py-2', { ['rounded-tl-lg']: !isScrollTop })}>번호</th>
+              <tr className={cn('sticky top-0 bg-white/60', { '!bg-white': isScrollTop })} ref={headerRef}>
+                <th className={cn('[50px] px-2 py-2', { 'rounded-tl-lg': !isScrollTop })}>번호</th>
                 <th className="w-[150px] px-4 py-2 text-left">이름</th>
                 <th className="w-[150px] px-4 py-2 text-left">소속</th>
                 <th className="w-[80px] px-4 py-2">라운드</th>
-                <th className={cn('[50px] px-2 py-2', { ['rounded-tr-lg']: !isScrollTop })}>구분</th>
+                <th className={cn('[50px] px-2 py-2', { 'rounded-tr-lg': !isScrollTop })}>구분</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-black/20 text-[12px] font-semibold">

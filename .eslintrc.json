@@ -1,13 +1,106 @@
 {
+	"root": true,
+	"env": {
+		"browser": true,
+		"node": true,
+		"es2021": true,
+		"jest": true
+	},
 	"parser": "@typescript-eslint/parser",
-	"plugins": ["import"],
-	"extends": "next/core-web-vitals",
+	"plugins": [
+		"prettier",
+		"@typescript-eslint",
+		"import"
+	],
+	"extends": [
+		"airbnb",
+		"airbnb/hooks",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:@next/next/recommended",
+		"plugin:prettier/recommended"
+	],
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"paths": [
+					"src"
+				]
+			}
+		}
+	},
 	"rules": {
+		"react/destructuring-assignment": "off",
+		"jsx-a11y/control-has-associated-label": "off",
+		"@typescript-eslint/no-unused-vars": "warn",
+		"@typescript-eslint/no-explicit-any": "warn",
+		"import/no-unresolved": "off",
+		"camelcase": "off",
+		"react/no-array-index-key": "off",
+		"react/react-in-jsx-scope": "off",
+		"react/require-default-props": "off",
+		"no-console": "warn",
+		"react/jsx-props-no-spreading": "off",
+		"react/function-component-definition": "off",
+		"import/no-extraneous-dependencies": "off",
+		"no-param-reassign": "off",
+		"import/extensions": "off",
+		"react/jsx-pascal-case": "off",
+		"consistent-return": "off",
+		"@typescript-eslint/no-empty-function": "off",
+		"no-shadow": "off",
+		"@typescript-eslint/no-non-null-assertion": "off",
+		"no-restricted-syntax": "off",
+		"no-nested-ternary": "off",
+		"react/jsx-filename-extension": [
+			"warn",
+			{
+				"extensions": [
+					".js",
+					".jsx",
+					".ts",
+					".tsx"
+				]
+			}
+		],
+		"default-case": "off",
+		"prettier/prettier": [
+			"error",
+			{
+				"endOfLine": "auto"
+			}
+		],
+		"jsx-a11y/label-has-associated-control": [
+			2,
+			{
+				"assert": "either"
+			}
+		],
+		"jsx-a11y/anchor-is-valid": "off",
 		"import/order": [
 			"error",
 			{
-				"groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"],
+				"pathGroups": [
+					{
+						"pattern": "constants/**",
+						"group": "object"
+					},
+					{
+						"pattern": "./**.scss",
+						"group": "type"
+					}
+				],
+				"groups": [
+					"builtin",
+					"external",
+					"internal",
+					"parent",
+					"sibling",
+					"index",
+					"object",
+					"type"
+				],
 				"newlines-between": "always",
+				"warnOnUnassignedImports": true,
 				"alphabetize": {
 					"order": "asc",
 					"caseInsensitive": true
