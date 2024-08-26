@@ -21,14 +21,61 @@ const Score = () => {
   return (
     <div className="w-full bg-black/80">
       <div className="mx-auto w-[1110px]">
-        <div className="text-center text-[36px] text-white">돌잔치 - Live Score</div>
-        <div className="flex gap-[16px] p-2">
+        <div className="my-[12px] text-center text-[36px] text-white">돌잔치 - Live Score</div>
+        <div className="flex gap-[16px] px-4">
+          <ul className="sticky top-[0px] flex h-full w-[150px] flex-col border-0 border-white/40">
+            <li className="">
+              <button
+                type="button"
+                onClick={() => scrollToSection(section1Ref)}
+                className="h-[50px] w-full px-2 text-left text-[14px] font-bold text-[#FEFEFE]"
+              >
+                <span className="text-[#a0a0a0]">Div. </span>
+                <span className="text-[20px]">D-1 </span>
+                <span className="rounded bg-[#3F72AF] px-[2px] py-[1px]">Men</span>
+              </button>
+            </li>
+            <li className="">
+              <button
+                type="button"
+                onClick={() => scrollToSection(section2Ref)}
+                className="h-[50px] w-full px-2 text-left text-[14px] font-bold text-[#FEFEFE]"
+              >
+                <span className="text-[#a0a0a0]">Div. </span>
+                <span className="text-[20px]">D-1 </span>
+                <span className="rounded bg-[#FF2E63] px-[2px] py-[1px]">Women</span>
+              </button>
+            </li>
+            <li className="">
+              <button
+                type="button"
+                onClick={() => scrollToSection(section2Ref)}
+                className="h-[50px] w-full px-2 text-left text-[14px] font-bold text-[#FEFEFE]"
+              >
+                <span className="text-[#a0a0a0]">Div. </span>
+                <span className="text-[20px]">D-2 </span>
+                <span className="rounded bg-[#3F72AF] px-[2px] py-[1px]">Men</span>
+              </button>
+            </li>
+            <li className="">
+              <button
+                type="button"
+                onClick={() => scrollToSection(section2Ref)}
+                className="h-[50px] w-full px-2 text-left text-[14px] font-bold text-[#FEFEFE]"
+              >
+                <span className="text-[#a0a0a0]">Div. </span>
+                <span className="text-[20px]">D-2 </span>
+                <span className="rounded bg-[#FF2E63] px-[2px] py-[1px]">Women</span>
+              </button>
+            </li>
+          </ul>
           <div className="flex flex-col gap-[16px]">
             <table ref={section1Ref} className="mx-auto table-fixed rounded-xl bg-[#202020] text-[#FEFEFE] shadow-md">
               <thead className="sticky top-[0px] z-[9999]">
                 <tr className="bg-[#4D4D4D] text-[#F9F7F7]">
                   <th className="px-2 text-left text-[14px]" colSpan={2}>
-                    Div. <span className="text-[20px]">D-1</span>{' '}
+                    <span className="text-[#d0d0d0]">Div. </span>
+                    <span className="text-[20px]">D-1</span>{' '}
                     <span className="rounded bg-[#3F72AF] px-[2px] py-[1px]">Men</span>
                   </th>
                   <th colSpan={10} className="text-left">
@@ -249,41 +296,6 @@ const Score = () => {
               </tbody>
             </table>
           </div>
-          <ul className="sticky top-[10px] flex h-full w-[150px] flex-col border border-white">
-            <li className="">
-              <button
-                type="button"
-                onClick={() => scrollToSection(section1Ref)}
-                className="h-[50px] w-full px-2 text-left text-[14px] font-bold text-[#FEFEFE]"
-              >
-                <span>Div. </span>
-                <span className="text-[20px]">D-1 </span>
-                <span className="rounded bg-[#3F72AF] px-[2px] py-[1px]">Men</span>
-              </button>
-            </li>
-            <li className="">
-              <button
-                type="button"
-                onClick={() => scrollToSection(section2Ref)}
-                className="h-[50px] w-full px-2 text-left text-[14px] font-bold text-[#FEFEFE]"
-              >
-                <span>Div. </span>
-                <span className="text-[20px]">D-1 </span>
-                <span className="rounded bg-[#FF2E63] px-[2px] py-[1px]">Women</span>
-              </button>
-            </li>
-            <li className="">
-              <button
-                type="button"
-                onClick={() => scrollToSection(section2Ref)}
-                className="h-[50px] w-full px-2 text-left text-[14px] font-bold text-[#FEFEFE]"
-              >
-                <span>Div. </span>
-                <span className="text-[20px]">D-2 </span>
-                <span className="rounded bg-[#3F72AF] px-[2px] py-[1px]">Men</span>
-              </button>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
