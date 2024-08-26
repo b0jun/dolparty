@@ -75,11 +75,10 @@ export default function Home() {
           <table className="text-md mx-auto mb-4 w-full table-fixed rounded-lg bg-white/50 shadow-md">
             <thead>
               <tr className={cn('sticky top-0 bg-white/60', { '!bg-white': isScrollTop })} ref={headerRef}>
-                <th className={cn('[50px] px-2 py-2', { 'rounded-tl-lg': !isScrollTop })}>번호</th>
-                <th className="w-[150px] px-4 py-2 text-left">이름</th>
-                <th className="w-[150px] px-4 py-2 text-left">소속</th>
+                <th className={cn('w-[70px] px-2 py-2', { 'rounded-tl-lg': !isScrollTop })}>번호</th>
+                <th className="px-4 py-2 text-left">이름</th>
                 <th className="w-[80px] px-4 py-2">라운드</th>
-                <th className={cn('[50px] px-2 py-2', { 'rounded-tr-lg': !isScrollTop })}>구분</th>
+                <th className={cn('w-[80px] px-2 py-2', { 'rounded-tr-lg': !isScrollTop })}>구분</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-black/20 text-[12px] font-semibold">
@@ -87,11 +86,8 @@ export default function Home() {
                 <tr key={index}>
                   <td className="px-2 py-2 text-center text-black/60">{100 + index + 1}</td>
                   <td className="truncate px-4 py-2 text-left">아무개{index === 2 ? 'Long Long Long Name' : ''}</td>
-                  <td className="truncate px-4 py-2 text-left">
-                    아무개클라이밍 {index === 2 ? 'Long Long Long Name' : ''}
-                  </td>
                   <td className="px-4 py-2 text-center">D1</td>
-                  <td className="px-2 py-2 text-center">남자부</td>
+                  <td className="px-2 py-2 text-center">Men</td>
                 </tr>
               ))}
             </tbody>
