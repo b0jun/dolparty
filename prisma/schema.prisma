@@ -16,6 +16,8 @@ model Contestant {
   difficulty  Difficulty
   submissions Submission[]
   gender      Gender
+
+  @@index([difficulty])
 }
 
 model Submission {
