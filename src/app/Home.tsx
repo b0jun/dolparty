@@ -32,7 +32,7 @@ export default function Home() {
     };
   }, []);
 
-  const { data } = useContestantList();
+  const { data, isLoading } = useContestantList();
 
   return (
     <main className="flex min-h-full min-w-[576px] flex-col bg-backdrop bg-cover bg-center bg-no-repeat">
@@ -85,14 +85,31 @@ export default function Home() {
               </tr>
             </thead>
             <tbody className="divide-y divide-black/20 text-[12px] font-semibold">
-              {data?.contestantList?.map(({ number, name, difficulty, gender }: any) => (
-                <tr key={number}>
-                  <td className="px-2 py-2 text-center text-black/60">{number}</td>
-                  <td className="truncate px-4 py-2 text-left">{name}</td>
-                  <td className="px-4 py-2 text-center">{difficulty}</td>
-                  <td className="px-2 py-2 text-center">{gender}</td>
-                </tr>
-              ))}
+              {!isLoading
+                ? data?.contestantList?.map(({ number, name, difficulty, gender }: any) => (
+                    <tr key={number}>
+                      <td className="px-2 py-2 text-center text-black/60">{number}</td>
+                      <td className="truncate px-4 py-2 text-left">{name}</td>
+                      <td className="px-4 py-2 text-center">{difficulty}</td>
+                      <td className="px-2 py-2 text-center">{gender}</td>
+                    </tr>
+                  ))
+                : new Array(15).fill(0).map((_, index) => (
+                    <tr key={index}>
+                      <td className="h-[35px] px-2 py-2">
+                        <div className="h-full w-full rounded-md bg-stone-300" />
+                      </td>
+                      <td className="h-[35px] px-4 py-2">
+                        <div className="h-full w-[100px] rounded-md bg-stone-300" />
+                      </td>
+                      <td className="h-[35px] px-4 py-2">
+                        <div className="h-full w-full rounded-md bg-stone-300" />
+                      </td>
+                      <td className="h-[35px] px-2 py-2">
+                        <div className="h-full w-full rounded-md bg-stone-300" />
+                      </td>
+                    </tr>
+                  ))}
             </tbody>
           </table>
         </article>

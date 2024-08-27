@@ -10,7 +10,7 @@ datasource db {
 
 model Contestant {
   id          String       @id @default(cuid())
-  number      Int          @unique
+  number      String       @unique
   name        String       @db.VarChar(50)
   phonenumber String?      @db.VarChar(30)
   difficulty  Difficulty
