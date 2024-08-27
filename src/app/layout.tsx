@@ -1,5 +1,6 @@
 import { Noto_Sans, Noto_Sans_KR } from 'next/font/google';
 
+import ReactQuery from './components/Provider/ReactQuery';
 import './globals.css';
 
 import type { Metadata } from 'next';
@@ -19,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${notoSansKr.className} ${notoSans.className}`}>{children}</body>
+      <body className={`${notoSansKr.className} ${notoSans.className}`}>
+        <ReactQuery>{children}</ReactQuery>
+      </body>
     </html>
   );
 }

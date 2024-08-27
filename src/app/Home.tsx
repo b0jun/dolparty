@@ -5,11 +5,12 @@ import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
+import useContestantList from '@/services/useContestantList';
+
 export default function Home() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-
-  const difficultyList = ['all', 'd1', 'd2', 'd3', 'd4'];
+  const difficultyList = ['all', 'D1', 'D2', 'D3', 'D4'];
   const currentType = searchParams.get('type') || 'all';
 
   const headerRef = useRef<HTMLTableRowElement>(null);
@@ -30,6 +31,8 @@ export default function Home() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  const { data } = useContestantList();
 
   return (
     <main className="flex min-h-full min-w-[576px] flex-col bg-backdrop bg-cover bg-center bg-no-repeat">
@@ -82,12 +85,12 @@ export default function Home() {
               </tr>
             </thead>
             <tbody className="divide-y divide-black/20 text-[12px] font-semibold">
-              {new Array(30).fill(0).map((_, index) => (
-                <tr key={index}>
-                  <td className="px-2 py-2 text-center text-black/60">{100 + index + 1}</td>
-                  <td className="truncate px-4 py-2 text-left">아무개{index === 2 ? 'Long Long Long Name' : ''}</td>
-                  <td className="px-4 py-2 text-center">D1</td>
-                  <td className="px-2 py-2 text-center">Men</td>
+              {data?.contestantList?.map(({ number, name, difficulty, gender }: any) => (
+                <tr key={number}>
+                  <td className="px-2 py-2 text-center text-black/60">{number}</td>
+                  <td className="truncate px-4 py-2 text-left">{name}</td>
+                  <td className="px-4 py-2 text-center">{difficulty}</td>
+                  <td className="px-2 py-2 text-center">{gender}</td>
                 </tr>
               ))}
             </tbody>

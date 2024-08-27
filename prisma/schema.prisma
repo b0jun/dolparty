@@ -1,0 +1,52 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Contestant {
+  id          String       @id @default(cuid())
+  number      Int          @unique
+  name        String       @db.VarChar(50)
+  phonenumber String?      @db.VarChar(30)
+  difficulty  Difficulty
+  submissions Submission[]
+  gender      Gender
+}
+
+model Submission {
+  id           Int        @id @default(autoincrement())
+  contestant   Contestant @relation(fields: [contestantId], references: [id])
+  contestantId String
+  problem      Problem    @relation(fields: [problemId], references: [id])
+  problemId    Int
+  difficulty   Difficulty
+  TopReached   Boolean    @default(false)
+  ZoneReached  Boolean    @default(false)
+  TopAttempts  Int        @default(0)
+  ZoneAttempts Int        @default(0)
+}
+
+model Problem {
+  id           Int          @id @default(autoincrement())
+  name         String       @db.VarChar(10)
+  difficulties Difficulty[]
+  submissions  Submission[]
+}
+
+enum Difficulty {
+  D1
+  D2
+  D3
+  D4
+  D5
+}
+
+enum Gender {
+  Men
+  Women
+}
