@@ -1,5 +1,5 @@
 import { Difficulty } from '@prisma/client';
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 
@@ -17,7 +17,6 @@ const useContestantList = () => {
   return useQuery({
     queryKey: contestantKeys.list(difficulty as Difficulty),
     queryFn,
-    placeholderData: keepPreviousData,
   });
 };
 
