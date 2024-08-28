@@ -1,10 +1,12 @@
 'use client';
 
+import cn from 'classnames';
+import { Bebas_Neue } from 'next/font/google';
 import { useRef } from 'react';
 
 import TShirtWithNumber from './TShirtWithNumber';
 
-import { TshirtIcon } from '@/svg';
+const bebasNeue = Bebas_Neue({ subsets: ['latin'], weight: ['400'] });
 
 const Score = () => {
   const section1Ref = useRef(null);
@@ -21,7 +23,11 @@ const Score = () => {
   return (
     <div className="w-full bg-black/80">
       <div className="mx-auto w-[1110px]">
-        <div className="my-[12px] text-center text-[36px] text-white">돌잔치 - Live Score</div>
+        <div className={cn('my-[12px] flex flex-col items-center text-center')}>
+          <p className={cn('text-[30px] text-[#AAAAAA]', bebasNeue.className)}>2024 DOLMENGE COMPETITION</p>
+          <p className={cn('text-[66px]/[60px] text-[#F6F6F6]', bebasNeue.className)}>Live Score</p>
+          <p className={cn('rounded-lg bg-white/10 px-2 text-[30px]/[40px] font-medium text-[#AAAAAA]')}>돌잔치</p>
+        </div>
         <div className="flex gap-[16px] px-4">
           <ul className="sticky top-[0px] flex h-full w-[150px] flex-col border-0 border-white/40">
             <li className="">

@@ -1,5 +1,5 @@
 /* eslint-disable no-await-in-loop */
-import { PrismaClient } from '@prisma/client';
+import { Difficulty, Gender, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
@@ -751,6 +751,38 @@ async function main() {
       gender: 'Women',
     },
   ];
+  const problems = [
+    { name: '1', difficulties: [Difficulty.D4] },
+    { name: '2', difficulties: [Difficulty.D4] },
+    { name: '3', difficulties: [Difficulty.D4] },
+    { name: '4', difficulties: [Difficulty.D4] },
+    { name: '5', difficulties: [Difficulty.D4] },
+    { name: '6', difficulties: [Difficulty.D4] },
+    { name: '7', difficulties: [Difficulty.D4] },
+    { name: '8', difficulties: [Difficulty.D3, Difficulty.D4] },
+    { name: '9', difficulties: [Difficulty.D3, Difficulty.D4] },
+    { name: '10', difficulties: [Difficulty.D3, Difficulty.D4] },
+    { name: '11', difficulties: [Difficulty.D3] },
+    { name: '12', difficulties: [Difficulty.D3] },
+    { name: '13', difficulties: [Difficulty.D3] },
+    { name: '14', difficulties: [Difficulty.D3] },
+    { name: '15', difficulties: [Difficulty.D2, Difficulty.D3] },
+    { name: '16', difficulties: [Difficulty.D2, Difficulty.D3] },
+    { name: '17', difficulties: [Difficulty.D2, Difficulty.D3] },
+    { name: '18', difficulties: [Difficulty.D2] },
+    { name: '19', difficulties: [Difficulty.D2] },
+    { name: '20', difficulties: [Difficulty.D2] },
+    { name: '21', difficulties: [Difficulty.D2] },
+    { name: '22', difficulties: [Difficulty.D1, Difficulty.D2] },
+    { name: '23', difficulties: [Difficulty.D1, Difficulty.D2] },
+    { name: '24', difficulties: [Difficulty.D1, Difficulty.D2] },
+    { name: '25', difficulties: [Difficulty.D1] },
+    { name: '26', difficulties: [Difficulty.D1] },
+    { name: '28', difficulties: [Difficulty.D1] },
+    { name: '29', difficulties: [Difficulty.D1] },
+    { name: '30', difficulties: [Difficulty.D1] },
+    { name: '31', difficulties: [Difficulty.D1] },
+  ];
   await batchPromises(contestants, 10, async contestant => {
     await prisma.contestant.upsert({
       where: { number: contestant.number },
@@ -758,8 +790,16 @@ async function main() {
       create: {
         number: contestant.number,
         name: contestant.name,
-        difficulty: contestant.difficulty as 'D1' | 'D2' | 'D3' | 'D4' | 'D5',
-        gender: contestant.gender as 'Men' | 'Women',
+        difficulty: contestant.difficulty as Difficulty,
+        gender: contestant.gender as Gender,
+      },
+    });
+  });
+  await batchPromises(problems, 10, async problem => {
+    await prisma.problem.create({
+      data: {
+        name: problem.name,
+        difficulties: problem.difficulties,
       },
     });
   });
