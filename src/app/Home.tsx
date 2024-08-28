@@ -86,7 +86,7 @@ export default function Home() {
             </thead>
             <tbody className="divide-y divide-black/20 text-[12px] font-semibold">
               {!isLoading
-                ? data?.contestantList?.map(({ number, name, difficulty, gender }: any) => (
+                ? data?.contestantList?.map(({ number, name, difficulty, gender }) => (
                     <tr key={number}>
                       <td className="px-2 py-2 text-center text-black/60">{number}</td>
                       <td className="truncate px-4 py-2 text-left">{name}</td>
