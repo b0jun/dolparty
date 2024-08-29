@@ -2,7 +2,7 @@
 
 import cn from 'classnames';
 import { Bebas_Neue } from 'next/font/google';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import TShirtWithNumber from './TShirtWithNumber';
 
@@ -14,6 +14,12 @@ const Score = () => {
   const section3Ref = useRef(null);
   const section4Ref = useRef(null);
 
+  const [showAttempts, setShowAttempts] = useState(false);
+
+  const toggleShowAttempts = () => {
+    setShowAttempts(prev => !prev);
+  };
+
   const scrollToSection = (sectionRef: any) => {
     // const offset = 50; // 원하는 여유 공간
     // const top = sectionRef.current.getBoundingClientRect().top + window.scrollY - offset;
@@ -22,8 +28,8 @@ const Score = () => {
   };
   return (
     <div className="w-full bg-black/80">
-      <div className="mx-auto w-[1110px]">
-        <div className={cn('my-[12px] flex flex-col items-center text-center')}>
+      <div className="mx-auto mb-[24px] w-[1110px]">
+        <div className={cn('my-[35px] flex flex-col items-center text-center')}>
           <p className={cn('text-[30px] text-[#AAAAAA]', bebasNeue.className)}>2024 DOLMENGE COMPETITION</p>
           <p className={cn('text-[66px]/[60px] text-[#F6F6F6]', bebasNeue.className)}>Live Score</p>
           <p className={cn('rounded-lg bg-white/10 px-2 text-[30px]/[40px] font-medium text-[#AAAAAA]')}>돌잔치</p>
@@ -76,16 +82,29 @@ const Score = () => {
             </li>
           </ul>
           <div className="flex flex-col gap-[16px]">
+            <div className="flex justify-end" />
             <table ref={section1Ref} className="mx-auto table-fixed rounded-xl bg-[#202020] text-[#FEFEFE] shadow-md">
               <thead className="sticky top-[0px] z-[9999]">
-                <tr className="bg-[#4D4D4D] text-[#F9F7F7]">
+                <tr className="h-[35px] bg-[#4D4D4D] text-[#F9F7F7]">
                   <th className="px-2 text-left text-[14px]" colSpan={2}>
                     <span className="text-[#d0d0d0]">Div. </span>
                     <span className="text-[20px]">D-1</span>{' '}
                     <span className="rounded bg-[#3F72AF] px-[2px] py-[1px]">Men</span>
                   </th>
                   <th colSpan={10} className="text-left">
-                    Problems
+                    <div className="flex items-center gap-[16px]">
+                      <span>Problems</span>
+                      <label className="inline-flex cursor-pointer items-center rounded-lg bg-black/20 px-2 py-1">
+                        <input
+                          type="checkbox"
+                          className="peer sr-only"
+                          checked={showAttempts}
+                          onChange={toggleShowAttempts}
+                        />
+                        <div className="peer relative h-[22px] w-[40px] rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-[18px] after:w-[18px] after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#F4CD5F] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-2 peer-focus:ring-[#F4CD5F]/30 rtl:peer-checked:after:-translate-x-full" />
+                        <span className="ms-3 text-sm font-medium text-white">Show Attempts</span>
+                      </label>
+                    </div>
                   </th>
                   <th />
                   <th />
@@ -118,10 +137,10 @@ const Score = () => {
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
                         <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-[#F4CD5F]">
-                          3
+                          {showAttempts ? 3 : null}
                         </div>
                         <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-[#F4CD5F]">
-                          2
+                          {showAttempts ? 2 : null}
                         </div>
                       </div>
                     </td>
@@ -129,7 +148,7 @@ const Score = () => {
                       <div className="flex flex-col items-center gap-[2px]">
                         <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                         <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-[#F4CD5F]">
-                          2
+                          {showAttempts ? 3 : null}
                         </div>
                       </div>
                     </td>
