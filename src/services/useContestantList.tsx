@@ -1,21 +1,32 @@
-import { Difficulty } from '@prisma/client';
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { Difficulty, Gender } from '@prisma/client';
+import { QueryFunctionContext, useQuery } from '@tanstack/react-query';
+import axios, { AxiosResponse } from 'axios';
 import { useSearchParams } from 'next/navigation';
 
 import { contestantKeys } from '@/lib/react-query/factory';
 
-const queryFn = async ({ queryKey }: any) => {
+type Contestant = {
+  number: string;
+  name: string;
+  difficulty: Difficulty;
+  gender: Gender;
+};
+type BodyType = {
+  contestantList: Contestant[];
+};
+
+const queryFn = async ({ queryKey }: QueryFunctionContext<ReturnType<typeof contestantKeys.list>>) => {
   const { difficulty } = queryKey[0];
-  return axios('/api/contestant/list', { params: { difficulty } }).then((res: any) => res.data);
+  const response: AxiosResponse<BodyType> = await axios('/api/contestant/list', { params: { difficulty } });
+  return response.data;
 };
 
 const useContestantList = () => {
   const searchParams = useSearchParams();
-  const difficulty = searchParams.get('type');
+  const difficulty = searchParams.get('type') as Difficulty | null;
 
   return useQuery({
-    queryKey: contestantKeys.list(difficulty as Difficulty),
+    queryKey: contestantKeys.list(difficulty),
     queryFn,
   });
 };

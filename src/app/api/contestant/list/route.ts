@@ -7,7 +7,6 @@ const GET = async (request: NextRequest) => {
   try {
     const { searchParams } = request.nextUrl;
     const difficulty = searchParams.get('difficulty') as Difficulty | null;
-    console.log(difficulty);
     const contestantListData = await prisma.contestant.findMany({
       select: {
         number: true,

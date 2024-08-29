@@ -35,7 +35,7 @@ export default function Home() {
   const { data, isLoading } = useContestantList();
 
   return (
-    <main className="flex min-h-full min-w-[576px] flex-col bg-backdrop bg-cover bg-center bg-no-repeat">
+    <main className="flex min-h-full min-w-[576px] flex-col bg-backdrop bg-cover bg-fixed bg-center bg-no-repeat">
       <section className="flex flex-1">
         <article className="mx-auto my-[24px] w-[576px] px-[16px]">
           <div className="mb-[24px] text-center">
@@ -86,7 +86,7 @@ export default function Home() {
             </thead>
             <tbody className="divide-y divide-black/20 text-[12px] font-semibold">
               {!isLoading
-                ? data?.contestantList?.map(({ number, name, difficulty, gender }: any) => (
+                ? data?.contestantList?.map(({ number, name, difficulty, gender }) => (
                     <tr key={number}>
                       <td className="px-2 py-2 text-center text-black/60">{number}</td>
                       <td className="truncate px-4 py-2 text-left">{name}</td>
@@ -96,17 +96,17 @@ export default function Home() {
                   ))
                 : new Array(15).fill(0).map((_, index) => (
                     <tr key={index}>
-                      <td className="h-[35px] px-2 py-2">
-                        <div className="h-full w-full rounded-md bg-stone-300" />
+                      <td className="flex h-[34px] justify-center px-2 py-2">
+                        <div className="h-full w-[30px] animate-pulse rounded-md bg-[#AAAAAA]/80" />
                       </td>
-                      <td className="h-[35px] px-4 py-2">
-                        <div className="h-full w-[100px] rounded-md bg-stone-300" />
+                      <td className="h-[34px] px-4 py-2">
+                        <div className="h-full w-[70px] animate-pulse rounded-md bg-[#AAAAAA]/80" />
                       </td>
-                      <td className="h-[35px] px-4 py-2">
-                        <div className="h-full w-full rounded-md bg-stone-300" />
+                      <td className="h-[34px] px-4 py-2">
+                        <div className="h-full w-full animate-pulse rounded-md bg-[#AAAAAA]/80" />
                       </td>
-                      <td className="h-[35px] px-2 py-2">
-                        <div className="h-full w-full rounded-md bg-stone-300" />
+                      <td className="h-[34px] px-2 py-2">
+                        <div className="h-full w-full animate-pulse rounded-md bg-[#AAAAAA]/80" />
                       </td>
                     </tr>
                   ))}

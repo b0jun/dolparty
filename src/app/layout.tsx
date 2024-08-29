@@ -5,7 +5,7 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 
-const notoSansKr = Noto_Sans_KR({ subsets: ['latin'], weight: ['400', '700', '900'] });
+const notoSansKr = Noto_Sans_KR({ subsets: ['latin'], weight: ['400', '500', '700', '900'] });
 const notoSans = Noto_Sans({ subsets: ['latin'], weight: ['400', '700', '900'] });
 
 export const metadata: Metadata = {
