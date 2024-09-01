@@ -156,7 +156,7 @@ const Score = () => {
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
                         <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-reached flex h-[30px] w-[30px] items-center justify-center rounded-[2px]">
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-reached">
                           {showAttempts ? 3 : null}
                         </div>
                       </div>
