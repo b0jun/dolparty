@@ -2,8 +2,6 @@
 
 import ProblemItem from './ProblemItem';
 
-import { MinusIcon, PlusIcon } from '@/svg';
-
 const Problems = () => {
   return (
     <div className="px-[16px]">

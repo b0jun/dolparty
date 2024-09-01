@@ -109,7 +109,7 @@ const ProblemItem = ({ index }: { index: number }) => {
                   id={`zoneReached_${index}`}
                   className="peer hidden"
                 />
-                <span className="peer-checked:bg-reached flex h-[70px] w-[70px] items-center justify-center rounded-lg rounded-tl-[50px_160px] border border-black/[0.05] bg-white/60 shadow-md peer-checked:font-bold">
+                <span className="flex h-[70px] w-[70px] items-center justify-center rounded-lg rounded-tl-[50px_160px] border border-black/[0.05] bg-white/60 shadow-md peer-checked:bg-reached peer-checked:font-bold">
                   Zone
                 </span>
               </label>
@@ -152,7 +152,7 @@ const ProblemItem = ({ index }: { index: number }) => {
               </div>
               <label htmlFor={`topReached_${index}`} className="cursor-pointer">
                 <input {...register('topReached')} type="checkbox" id={`topReached_${index}`} className="peer hidden" />
-                <span className="peer-checked:bg-reached flex h-[70px] w-[70px] items-center justify-center rounded-lg rounded-bl-[50px_160px] border border-black/[0.05] bg-white/60 shadow-md peer-checked:font-bold">
+                <span className="flex h-[70px] w-[70px] items-center justify-center rounded-lg rounded-bl-[50px_160px] border border-black/[0.05] bg-white/60 shadow-md peer-checked:bg-reached peer-checked:font-bold">
                   Top
                 </span>
               </label>
