@@ -11,6 +11,7 @@ const Problems = () => {
           <ProblemItem index={index} key={index} />
         ))}
       </ul>
+      {/* TODO: REMOVE */}
       <ul>
         <li>Top, Zone은 처음에 누를 수 없다. 눌렀을때 안된다고 토스트 메세지로 알림</li>
         <li />

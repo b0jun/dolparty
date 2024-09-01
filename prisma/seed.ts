@@ -129,7 +129,7 @@ async function main() {
     { number: '115', name: '전가을', difficulty: Difficulty.D4, gender: Gender.Women },
     { number: '116', name: '문지원', difficulty: Difficulty.D4, gender: Gender.Women },
     { number: '117', name: '조민아', difficulty: Difficulty.D4, gender: Gender.Women },
-    { number: '118', name: '길혜경', difficulty: Difficulty.D4, gender: Gender.Women },
+    { number: '118', name: '박준서', difficulty: Difficulty.D4, gender: Gender.Women },
     { number: '119', name: '김한별', difficulty: Difficulty.D4, gender: Gender.Women },
     { number: '120', name: '김아인', difficulty: Difficulty.D4, gender: Gender.Women },
     { number: '121', name: '이유미', difficulty: Difficulty.D4, gender: Gender.Women },
