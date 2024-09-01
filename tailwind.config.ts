@@ -11,6 +11,9 @@ const config: Config = {
       backgroundImage: {
         backdrop: "url('/images/backdrop.jpg')",
       },
+      colors: {
+        reached: '#F4CD5F',
+      },
     },
   },
   plugins: [],

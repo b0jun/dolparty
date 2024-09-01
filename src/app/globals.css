@@ -4,5 +4,59 @@
 
 html,
 body {
-	height: 100%;
+  height: 100%;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield; /* Firefox */
+  -webkit-appearance: none; /* Chrome, Safari */
+  appearance: none; /* 표준 */
+}
+.custom-checkbox {
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  font-size: 1.5rem;
+  text-align: center;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  margin: 10px;
+  border: 2px solid #ccc;
+  border-radius: 15px;
+  background-color: #e0e0e0;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 약간의 그림자 효과 추가 */
+}
+
+.custom-checkbox input[type='checkbox'] {
+  display: none;
+}
+
+.custom-checkbox span {
+  display: inline-block;
+  color: #000;
+  transition: all 0.3s ease;
+}
+
+.custom-checkbox:hover {
+  background-color: #d0d0d0;
+  border-color: #999;
+}
+
+.custom-checkbox input[type='checkbox']:checked + span {
+  background-color: #3498db;
+  color: white;
+  border-radius: 15px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* 모바일 기기용 미디어 쿼리 */
+@media (max-width: 600px) {
+  .custom-checkbox {
+    width: 120px; /* 모바일에서 버튼 크기 증가 */
+    height: 120px;
+    line-height: 120px;
+    font-size: 1.2rem; /* 폰트 크기 약간 축소 */
+  }
 }
