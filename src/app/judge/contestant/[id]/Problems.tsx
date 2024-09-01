@@ -6,7 +6,7 @@ const Problems = () => {
   return (
     <div className="px-[16px]">
       <p className="mb-[6px] text-[18px] text-black/60">Problems</p>
-      <ul className="flex flex-col gap-4">
+      <ul className="flex flex-col gap-6">
         {new Array(10).fill(0).map((_, index) => (
           <ProblemItem index={index} key={index} />
         ))}
