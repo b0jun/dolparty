@@ -2,6 +2,7 @@
 
 import cn from 'classnames';
 import { Bebas_Neue } from 'next/font/google';
+import Link from 'next/link';
 import { useRef, useState } from 'react';
 
 import TShirtWithNumber from './TShirtWithNumber';
@@ -29,12 +30,12 @@ const Score = () => {
   return (
     <div className="w-full bg-black/80">
       <div className="mx-auto mb-[24px] w-[1110px]">
-        <div className={cn('my-[35px] flex flex-col items-center text-center')}>
+        <div className={cn('mb-[60px] mt-[30px] flex flex-col items-center text-center')}>
           <p className={cn('text-[30px] text-[#AAAAAA]', bebasNeue.className)}>2024 DOLMENGE COMPETITION</p>
           <p className={cn('text-[66px]/[60px] text-[#F6F6F6]', bebasNeue.className)}>Live Score</p>
           <p className={cn('rounded-lg bg-white/10 px-2 text-[30px]/[40px] font-medium text-[#AAAAAA]')}>돌잔치</p>
         </div>
-        <div className="flex gap-[16px] px-4">
+        <div className="flex justify-center gap-[16px] px-4">
           <ul className="sticky top-[0px] flex h-full w-[150px] flex-col border-0 border-white/40">
             <li className="">
               <button
@@ -81,8 +82,14 @@ const Score = () => {
               </button>
             </li>
           </ul>
-          <div className="flex flex-col gap-[16px]">
-            <div className="flex justify-end" />
+          <div className="relative flex flex-col gap-[16px]">
+            <div className="absolute -top-[50px] right-0 z-50 flex justify-end">
+              <label className="inline-flex cursor-pointer items-center rounded-lg bg-black/20 p-2">
+                <input type="checkbox" className="peer sr-only" checked={showAttempts} onChange={toggleShowAttempts} />
+                <div className="peer relative h-[22px] w-[40px] rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-[18px] after:w-[18px] after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#F4CD5F] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-2 peer-focus:ring-[#F4CD5F]/30 rtl:peer-checked:after:-translate-x-full" />
+                <span className="ms-2 text-sm font-medium text-white/50">Show Attempts of Problems</span>
+              </label>
+            </div>
             <table ref={section1Ref} className="mx-auto table-fixed rounded-xl bg-[#202020] text-[#FEFEFE] shadow-md">
               <thead className="sticky top-[0px] z-[9999]">
                 <tr className="h-[35px] bg-[#4D4D4D] text-[#F9F7F7]">
@@ -92,19 +99,7 @@ const Score = () => {
                     <span className="rounded bg-[#3F72AF] px-[2px] py-[1px]">Men</span>
                   </th>
                   <th colSpan={10} className="text-left">
-                    <div className="flex items-center gap-[16px]">
-                      <span>Problems</span>
-                      <label className="inline-flex cursor-pointer items-center rounded-lg bg-black/20 px-2 py-1">
-                        <input
-                          type="checkbox"
-                          className="peer sr-only"
-                          checked={showAttempts}
-                          onChange={toggleShowAttempts}
-                        />
-                        <div className="peer relative h-[22px] w-[40px] rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-[18px] after:w-[18px] after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#F4CD5F] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-2 peer-focus:ring-[#F4CD5F]/30 rtl:peer-checked:after:-translate-x-full" />
-                        <span className="ms-3 text-sm font-medium text-white">Show Attempts</span>
-                      </label>
-                    </div>
+                    Problems
                   </th>
                   <th />
                   <th />
@@ -129,9 +124,23 @@ const Score = () => {
                   <tr key={index}>
                     <td className="px-2 py-2 text-center text-[22px] font-black">{index + 1}</td>
                     <td className="px-2 py-2">
-                      <div className="flex items-center gap-[6px]">
-                        <TShirtWithNumber backNumber={123} />
-                        아무개
+                      <div className="flex">
+                        {true ? (
+                          <Link
+                            href={`/judge/contestant/${index}`}
+                            className="flex items-center gap-[6px]"
+                            // aria-disabled
+                            // tabIndex={-1}
+                          >
+                            <TShirtWithNumber backNumber={123} />
+                            아무개
+                          </Link>
+                        ) : (
+                          <div className="flex items-center gap-[6px]">
+                            <TShirtWithNumber backNumber={123} />
+                            아무개
+                          </div>
+                        )}
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
@@ -146,58 +155,58 @@ const Score = () => {
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-[#F4CD5F]">
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="bg-reached flex h-[30px] w-[30px] items-center justify-center rounded-[2px]">
                           {showAttempts ? 3 : null}
                         </div>
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-2 py-2 text-center font-black">3</td>
@@ -258,7 +267,7 @@ const Score = () => {
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                         <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-[#F4CD5F]">
                           2
                         </div>
@@ -266,50 +275,50 @@ const Score = () => {
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-1 py-2 text-center text-[#202020]">
                       <div className="flex flex-col items-center gap-[2px]">
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
-                        <div className="bg-[#F9ED flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
+                        <div className="flex h-[30px] w-[30px] items-center justify-center rounded-[2px] bg-black" />
                       </div>
                     </td>
                     <td className="px-2 py-2 text-center font-black">3</td>
