@@ -2,7 +2,6 @@
 
 import { Difficulty } from '@prisma/client';
 import { useEffect, useRef, useState } from 'react';
-import { number } from 'zod';
 
 import NumberSearchForm from './NumberSearchForm';
 import ProblemItem from './ProblemItem';
@@ -23,7 +22,7 @@ const ContestantDetail = ({ number, difficulty, name }: Props) => {
   const handleScroll = () => {
     if (targetRef.current) {
       const rect = targetRef.current.getBoundingClientRect();
-      setIsAtTop(rect.top <= 0); // 요소의 top이 0보다 작거나 같으면 최상단에 닿았다고 간주
+      setIsAtTop(rect.top <= 0);
     }
   };
 
