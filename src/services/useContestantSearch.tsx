@@ -29,14 +29,6 @@ const useContestantSearch = () => {
       } else {
         toast('예기치 않은 오류가 발생했습니다. 다시 시도해 주세요.');
       }
-      // 2. 요청이 서버에 도달하지 못한 경우 (네트워크 에러)
-      // else if (error.request) {
-      //   alert('Network Error: Failed to reach the server. Please try again later.');
-      // }
-      // // 3. 기타 클라이언트 에러 처리
-      // else {
-      //   alert(`Client Error: ${error.message}`);
-      // }
     },
   });
 };

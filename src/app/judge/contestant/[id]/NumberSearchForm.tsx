@@ -18,7 +18,7 @@ const SearchSchema = z.object({
 
 type SearchSchemaType = z.infer<typeof SearchSchema>;
 
-const NumberSearchForm = () => {
+const NumberSearchForm = ({ isAtTop }: { isAtTop: boolean }) => {
   const methods = useForm<SearchSchemaType>({
     resolver: zodResolver(SearchSchema),
     defaultValues: {
@@ -28,15 +28,19 @@ const NumberSearchForm = () => {
   const {
     control,
     handleSubmit,
-    formState: { isValid },
+    formState: { isValid, isSubmitting },
   } = methods;
   const { mutate, isPending } = useContestantSearch();
   const onSubmit: SubmitHandler<SearchSchemaType> = data => {
     mutate({ number: data.contestantNumber });
   };
-  const isSearchValid = isValid && !isPending;
+  const isSearchValid = isValid && !isPending && !isSubmitting;
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="mb-[24px] flex items-center justify-end gap-4">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className={cn('z-50 mb-[24px] flex items-center justify-end gap-4 px-[16px]', { 'sticky top-[18px]': isAtTop })}
+    >
       <label htmlFor="contestantNumber" className="font-medium">
         선수 번호
       </label>

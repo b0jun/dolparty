@@ -1,6 +1,7 @@
 'use client';
 
 import { Difficulty } from '@prisma/client';
+import { useEffect, useRef, useState } from 'react';
 import { number } from 'zod';
 
 import NumberSearchForm from './NumberSearchForm';
@@ -16,10 +17,30 @@ type Props = {
 
 const ContestantDetail = ({ number, difficulty, name }: Props) => {
   const { data, isLoading, isError } = useContestantProblems();
+  const targetRef = useRef<HTMLDivElement>(null);
+  const [isAtTop, setIsAtTop] = useState(false);
+
+  const handleScroll = () => {
+    if (targetRef.current) {
+      const rect = targetRef.current.getBoundingClientRect();
+      setIsAtTop(rect.top <= 0); // 요소의 top이 0보다 작거나 같으면 최상단에 닿았다고 간주
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
   return (
     <div className="mx-auto w-[1024px] min-w-[768px] bg-white/50 px-[16px] py-[24px]">
-      <NumberSearchForm />
-      <div className="sticky top-0 z-10 mb-[24px] grid grid-cols-3 gap-4 rounded-lg border border-black/10 bg-[#f4f4f4] p-4">
+      <NumberSearchForm isAtTop={isAtTop} />
+      <div
+        ref={targetRef}
+        className="sticky top-0 z-10 mb-[24px] grid grid-cols-3 gap-4 rounded-lg border border-black/10 bg-[#f4f4f4] p-4 pr-[150px]"
+      >
         <div className="flex flex-col">
           <span className="text-black/60">선수 번호</span>
           <span className="text-[24px]/[32px] font-bold">{number}</span>
@@ -33,7 +54,7 @@ const ContestantDetail = ({ number, difficulty, name }: Props) => {
           <span className="text-[24px]/[32px] font-bold">{name}</span>
         </div>
       </div>
-      <div className="px-[16px]">
+      <div className="mb-[120px] px-[16px]">
         <p className="mb-[6px] text-[18px] text-black/60">Problems</p>
         {!isLoading && data?.problems?.length === 0 && <p>할당된 문제가 없습니다.</p>}
         {isError && <p>유저 정보를 불러오지 못했습니다.</p>}

@@ -165,6 +165,7 @@ async function main() {
     { name: '24', difficulties: [Difficulty.D1, Difficulty.D2] },
     { name: '25', difficulties: [Difficulty.D1] },
     { name: '26', difficulties: [Difficulty.D1] },
+    { name: '27', difficulties: [Difficulty.D1] },
     { name: '28', difficulties: [Difficulty.D1] },
     { name: '29', difficulties: [Difficulty.D1] },
     { name: '30', difficulties: [Difficulty.D1] },
