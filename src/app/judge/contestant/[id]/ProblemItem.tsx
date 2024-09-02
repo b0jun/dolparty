@@ -59,7 +59,7 @@ const ProblemItem = ({ id, name }: Props) => {
   return (
     <li className="flex h-[100px] items-center overflow-hidden rounded-lg border border-black/10 bg-white/20">
       <form className="flex h-full w-full" onSubmit={handleSubmit(onSubmit)}>
-        <div className="flex h-full w-[90px] items-center justify-center bg-white/30 font-black">
+        <div className="mr-2 flex h-full w-[90px] items-center justify-center bg-white/30 font-black">
           <div>
             <span className="text-[#45474B]">No.</span>
             <span className="text-[34px]">{name}</span>

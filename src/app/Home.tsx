@@ -1,11 +1,14 @@
 'use client';
 
 import cn from 'classnames';
+import { Bebas_Neue } from 'next/font/google';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
 import useContestantList from '@/services/useContestantList';
+
+const bebasNeue = Bebas_Neue({ subsets: ['latin'], weight: ['400'] });
 
 export default function Home() {
   const searchParams = useSearchParams();
@@ -37,10 +40,15 @@ export default function Home() {
   return (
     <main className="flex min-h-full min-w-[576px] flex-col bg-backdrop bg-cover bg-fixed bg-center bg-no-repeat">
       <section className="flex flex-1">
-        <article className="mx-auto my-[24px] w-[576px] px-[16px]">
+        <article className="mx-auto my-[30px] w-[576px] px-[16px]">
           <div className="mb-[24px] text-center">
-            <p className="text-[56px] font-black">1st, 돌잔치</p>
-            <p className="font-medium text-[#181411]">9월 7일 토요일 대회 참가자 현황</p>
+            <p className={cn('text-[30px] text-black/40', bebasNeue.className)}>2024 DOLMENGE COMPETITION</p>
+            <p className="text-[56px]/[60px] font-black tracking-tight">1st, 돌잔치</p>
+            <div className="flex justify-center">
+              <p className="mt-3 rounded-md bg-black/40 px-2 py-1 text-[14px] font-bold text-[#f0f0f0]">
+                2024년 9월 7일 (토) 09:00 ~ 21:00
+              </p>
+            </div>
           </div>
           <div className="mb-3 flex items-center justify-between">
             <ul className="flex rounded-lg shadow-sm">
