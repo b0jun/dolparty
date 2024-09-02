@@ -1,15 +1,21 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
+import cn from 'classnames';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { PatternFormat } from 'react-number-format';
 import { z } from 'zod';
 
+import Spinner from '@/app/components/Spinner';
+import useContestantSearch from '@/services/useContestantSearch';
 import { SearchIcon } from '@/svg';
 
 const SearchSchema = z.object({
-  contestantNumber: z.string(),
+  contestantNumber: z.string().refine(val => /^\d{3}$/.test(val), {
+    message: 'contestantNumber must be exactly 3 digits',
+  }),
 });
+
 type SearchSchemaType = z.infer<typeof SearchSchema>;
 
 const NumberSearchForm = () => {
@@ -19,10 +25,18 @@ const NumberSearchForm = () => {
       contestantNumber: '',
     },
   });
-  const { register, control, handleSubmit, watch, setValue } = methods;
-  console.log(watch());
+  const {
+    control,
+    handleSubmit,
+    formState: { isValid },
+  } = methods;
+  const { mutate, isPending } = useContestantSearch();
+  const onSubmit: SubmitHandler<SearchSchemaType> = data => {
+    mutate({ number: data.contestantNumber });
+  };
+  const isSearchValid = isValid && !isPending;
   return (
-    <form className="mb-[24px] flex items-center justify-end gap-4">
+    <form onSubmit={handleSubmit(onSubmit)} className="mb-[24px] flex items-center justify-end gap-4">
       <label htmlFor="contestantNumber" className="font-medium">
         선수 번호
       </label>
@@ -31,7 +45,8 @@ const NumberSearchForm = () => {
           control={control}
           name="contestantNumber"
           render={({ field }) => {
-            const { ...rest } = field;
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
+            const { ref, ...rest } = field;
             return (
               <PatternFormat
                 {...rest}
@@ -44,8 +59,14 @@ const NumberSearchForm = () => {
           }}
         />
         <div className="flex p-1">
-          <button type="button" className="flex items-center justify-center rounded-lg bg-[#3F4E4F] p-2">
-            <SearchIcon fill="white" width={24} height={24} />
+          <button
+            type="submit"
+            disabled={!isSearchValid}
+            className={cn('flex items-center justify-center rounded-lg bg-[#3F4E4F] p-2', {
+              'opacity-50': !isSearchValid,
+            })}
+          >
+            {isPending ? <Spinner /> : <SearchIcon fill={isSearchValid ? 'white' : '#aaaaaa'} width={24} height={24} />}
           </button>
         </div>
       </div>

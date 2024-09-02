@@ -5,6 +5,8 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 
+import Toast from '@/components/Toast';
+
 const notoSansKr = Noto_Sans_KR({ subsets: ['latin'], weight: ['400', '500', '700', '900'] });
 const notoSans = Noto_Sans({ subsets: ['latin'], weight: ['400', '700', '900'] });
 
@@ -29,6 +31,7 @@ export default function RootLayout({
     <html lang="ko">
       <body className={`${notoSansKr.className} ${notoSans.className}`}>
         <ReactQuery>{children}</ReactQuery>
+        <Toast />
       </body>
     </html>
   );
