@@ -14,7 +14,12 @@ const ProblemSchema = z.object({
 
 type ProblemSchemaType = z.infer<typeof ProblemSchema>;
 
-const ProblemItem = ({ index }: { index: number }) => {
+type Props = {
+  id: number;
+  name: string;
+};
+
+const ProblemItem = ({ id, name }: Props) => {
   const methods = useForm<ProblemSchemaType>({
     resolver: zodResolver(ProblemSchema),
     defaultValues: {
@@ -48,27 +53,23 @@ const ProblemItem = ({ index }: { index: number }) => {
   };
 
   const onSubmit: SubmitHandler<ProblemSchemaType> = data => {
-    console.log('onSubmit:', index, data);
+    console.log('onSubmit:', id, data);
   };
-  console.log(watch());
 
   return (
-    <li
-      key={index}
-      className="flex h-[100px] items-center overflow-hidden rounded-lg border border-black/10 bg-white/20"
-    >
+    <li className="flex h-[100px] items-center overflow-hidden rounded-lg border border-black/10 bg-white/20">
       <form className="flex h-full w-full" onSubmit={handleSubmit(onSubmit)}>
         <div className="flex h-full w-[90px] items-center justify-center bg-white/30 font-black">
           <div>
             <span className="text-[#45474B]">No.</span>
-            <span className="text-[34px]">{22 + index}</span>
+            <span className="text-[34px]">{name}</span>
           </div>
         </div>
         <div className="flex flex-1 items-center justify-between">
           <div className="flex items-center gap-[30px] px-3">
             <div className="flex">
               <div className="flex h-[70px] flex-col justify-center rounded-lg rounded-br-[50px_160px] border border-black/[0.05] px-3 pb-2 pt-1 shadow-md">
-                <label htmlFor={`zoneAttempts_${index}`} className="mb-1 flex text-[12px] text-black/60">
+                <label htmlFor={`zoneAttempts_${id}`} className="mb-1 flex text-[12px] text-black/60">
                   Zone Attempts
                 </label>
                 <div className="flex items-center">
@@ -84,7 +85,7 @@ const ProblemItem = ({ index }: { index: number }) => {
                   <input
                     {...register('zoneAttempts')}
                     type="number"
-                    id={`zoneAttempts_${index}`}
+                    id={`zoneAttempts_${id}`}
                     tabIndex={-1}
                     readOnly
                     onMouseDown={e => e.preventDefault()}
@@ -102,13 +103,8 @@ const ProblemItem = ({ index }: { index: number }) => {
                   </button>
                 </div>
               </div>
-              <label htmlFor={`zoneReached_${index}`} className="cursor-pointer">
-                <input
-                  {...register('zoneReached')}
-                  type="checkbox"
-                  id={`zoneReached_${index}`}
-                  className="peer hidden"
-                />
+              <label htmlFor={`zoneReached_${id}`} className="cursor-pointer">
+                <input {...register('zoneReached')} type="checkbox" id={`zoneReached_${id}`} className="peer hidden" />
                 <span className="flex h-[70px] w-[70px] items-center justify-center rounded-lg rounded-tl-[50px_160px] border border-black/[0.05] bg-white/60 shadow-md peer-checked:bg-reached peer-checked:font-bold">
                   Zone
                 </span>
@@ -116,7 +112,7 @@ const ProblemItem = ({ index }: { index: number }) => {
             </div>
             <div className="flex">
               <div className="flex h-[70px] flex-col justify-center rounded-lg rounded-tr-[50px_160px] border border-black/[0.05] px-3 pb-2 pt-1 shadow-md">
-                <label htmlFor={`topAttempts_${index}`} className="mb-1 flex text-[12px] text-black/60">
+                <label htmlFor={`topAttempts_${id}`} className="mb-1 flex text-[12px] text-black/60">
                   Top Attempts
                 </label>
                 <div className="flex items-center">
@@ -132,7 +128,7 @@ const ProblemItem = ({ index }: { index: number }) => {
                   <input
                     {...register('topAttempts')}
                     type="number"
-                    id={`topAttempts_${index}`}
+                    id={`topAttempts_${id}`}
                     tabIndex={-1}
                     readOnly
                     onMouseDown={e => e.preventDefault()}
@@ -150,8 +146,8 @@ const ProblemItem = ({ index }: { index: number }) => {
                   </button>
                 </div>
               </div>
-              <label htmlFor={`topReached_${index}`} className="cursor-pointer">
-                <input {...register('topReached')} type="checkbox" id={`topReached_${index}`} className="peer hidden" />
+              <label htmlFor={`topReached_${id}`} className="cursor-pointer">
+                <input {...register('topReached')} type="checkbox" id={`topReached_${id}`} className="peer hidden" />
                 <span className="flex h-[70px] w-[70px] items-center justify-center rounded-lg rounded-bl-[50px_160px] border border-black/[0.05] bg-white/60 shadow-md peer-checked:bg-reached peer-checked:font-bold">
                   Top
                 </span>

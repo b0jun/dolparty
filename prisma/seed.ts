@@ -135,7 +135,7 @@ async function main() {
     { number: '121', name: '이유미', difficulty: Difficulty.D4, gender: Gender.Women },
     { number: '122', name: '김혜숙', difficulty: Difficulty.D4, gender: Gender.Women },
     { number: '123', name: '김형은', difficulty: Difficulty.D4, gender: Gender.Women },
-    { number: '123', name: '김별', difficulty: Difficulty.D4, gender: Gender.Women },
+    { number: '124', name: '김별', difficulty: Difficulty.D4, gender: Gender.Women },
   ];
 
   const problems = [
@@ -182,14 +182,14 @@ async function main() {
       },
     });
   });
-  await batchPromises(problems, 10, async problem => {
+  for (const problem of problems) {
     await prisma.problem.create({
       data: {
         name: problem.name,
         difficulties: problem.difficulties,
       },
     });
-  });
+  }
 }
 
 main()
