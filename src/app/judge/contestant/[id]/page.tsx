@@ -15,7 +15,7 @@ async function fetchContestantInfo(id: string) {
   }
 }
 
-const ContestantDetailPage = async ({ params }: any) => {
+const ContestantDetailPage = async ({ params }: { params: { id: string } }) => {
   const { id } = params;
   const contestantInfo = await fetchContestantInfo(id);
   return (
@@ -24,6 +24,7 @@ const ContestantDetailPage = async ({ params }: any) => {
         <ContestantDetail
           number={contestantInfo.number}
           difficulty={contestantInfo.difficulty}
+          gender={contestantInfo.gender}
           name={contestantInfo.name}
         />
       </div>

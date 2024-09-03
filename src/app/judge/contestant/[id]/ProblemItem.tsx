@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { z } from 'zod';
 
+import { Submission } from '@/services/useContestantProblems';
 import { MinusIcon, PlusIcon } from '@/svg';
 
 const ProblemSchema = z.object({
@@ -17,19 +18,27 @@ type ProblemSchemaType = z.infer<typeof ProblemSchema>;
 type Props = {
   id: number;
   name: string;
+  submission: Submission;
 };
 
-const ProblemItem = ({ id, name }: Props) => {
+const ProblemItem = ({ id, name, submission }: Props) => {
   const methods = useForm<ProblemSchemaType>({
     resolver: zodResolver(ProblemSchema),
     defaultValues: {
-      zoneAttempts: 0,
-      zoneReached: false,
-      topAttempts: 0,
-      topReached: false,
+      zoneAttempts: submission.zoneAttempts,
+      zoneReached: submission.zoneReached,
+      topAttempts: submission.topAttempts,
+      topReached: submission.topReached,
     },
   });
-  const { register, handleSubmit, watch, setValue } = methods;
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { isDirty },
+  } = methods;
+
   const [zoneAttempts, zoneReached, topAttempts, topReached] = watch([
     'zoneAttempts',
     'zoneReached',
@@ -40,7 +49,7 @@ const ProblemItem = ({ id, name }: Props) => {
   const increment = (property: 'zoneAttempts' | 'topAttempts') => {
     const currentValue = Number(watch(property));
     if (currentValue < 1000) {
-      setValue(property, currentValue + 1);
+      setValue(property, currentValue + 1, { shouldDirty: true });
     }
   };
 
@@ -48,7 +57,7 @@ const ProblemItem = ({ id, name }: Props) => {
     const currentValue = Number(watch(property));
 
     if (currentValue > 0) {
-      setValue(property, currentValue - 1);
+      setValue(property, currentValue - 1, { shouldDirty: true });
     }
   };
 
@@ -183,7 +192,11 @@ const ProblemItem = ({ id, name }: Props) => {
             <div className="flex-1 p-1">
               <button
                 type="submit"
-                className="mr-4 h-[40px] w-full rounded-lg border bg-[#393E46] font-bold text-[#f7f7f7] shadow-sm"
+                disabled={!isDirty}
+                className={cn(
+                  'mr-4 h-[40px] w-full rounded-lg border bg-[#393E46] font-bold text-[#f7f7f7] shadow-sm',
+                  { 'opacity-50': !isDirty },
+                )}
               >
                 저장
               </button>

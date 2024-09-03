@@ -12,7 +12,6 @@ model Contestant {
   id          String       @id @default(cuid())
   number      String       @unique
   name        String       @db.VarChar(50)
-  phonenumber String?      @db.VarChar(30)
   difficulty  Difficulty
   submissions Submission[]
   gender      Gender
@@ -31,6 +30,8 @@ model Submission {
   ZoneReached  Boolean    @default(false)
   TopAttempts  Int        @default(0)
   ZoneAttempts Int        @default(0)
+
+  @@unique([contestantId, problemId])
 }
 
 model Problem {
@@ -45,7 +46,6 @@ enum Difficulty {
   D2
   D3
   D4
-  D5
 }
 
 enum Gender {

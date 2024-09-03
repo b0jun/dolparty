@@ -3,12 +3,12 @@ import { Difficulty, Gender, PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-async function batchPromises<T>(items: T[], batchSize: number, fn: (item: T) => Promise<any>) {
-  for (let i = 0; i < items.length; i += batchSize) {
-    const batch = items.slice(i, i + batchSize);
-    await Promise.all(batch.map(fn));
-  }
-}
+// async function batchPromises<T>(items: T[], batchSize: number, fn: (item: T) => Promise<any>) {
+//   for (let i = 0; i < items.length; i += batchSize) {
+//     const batch = items.slice(i, i + batchSize);
+//     await Promise.all(batch.map(fn));
+//   }
+// }
 
 async function main() {
   const contestants = [
@@ -171,18 +171,25 @@ async function main() {
     { name: '30', difficulties: [Difficulty.D1] },
     { name: '31', difficulties: [Difficulty.D1] },
   ];
-  await batchPromises(contestants, 10, async contestant => {
-    await prisma.contestant.upsert({
-      where: { number: contestant.number },
-      update: {},
-      create: {
-        number: contestant.number,
-        name: contestant.name,
-        difficulty: contestant.difficulty as Difficulty,
-        gender: contestant.gender as Gender,
-      },
+  // await batchPromises(contestants, 10, async contestant => {
+  //   await prisma.contestant.upsert({
+  //     where: { number: contestant.number },
+  //     update: {},
+  //     create: {
+  //       number: contestant.number,
+  //       name: contestant.name,
+  //       difficulty: contestant.difficulty as Difficulty,
+  //       gender: contestant.gender as Gender,
+  //     },
+  //   });
+  // });
+
+  for (const contestant of contestants) {
+    await prisma.contestant.create({
+      data: contestant,
     });
-  });
+  }
+
   for (const problem of problems) {
     await prisma.problem.create({
       data: {

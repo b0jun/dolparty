@@ -7,4 +7,9 @@ const contestantKeys = {
   problems: (id: string) => [{ ...contestantKeys.base[0], entity: 'contestantProblems', id }] as const,
 };
 
-export { contestantKeys };
+const scoreKeys = {
+  base: [{ scope: 'score' }] as const,
+  lists: () => [{ ...contestantKeys.base[0], entity: 'scoreList' }] as const,
+};
+
+export { contestantKeys, scoreKeys };
