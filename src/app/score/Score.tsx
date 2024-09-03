@@ -58,7 +58,7 @@ const Score = () => {
           <div className="w-[800px]">
             <div className="flex flex-col gap-[500px]">
               {data?.groupedContestants?.map(({ difficulty, gender, problems, scoreList }, index: number) => (
-                <div className="relative min-h-[100vh]">
+                <div key={`${difficulty}-${gender}`} className="relative min-h-[100vh]">
                   <div className="absolute -top-[50px] right-0 z-50 flex justify-end">
                     <label className="inline-flex cursor-pointer items-center rounded-lg bg-black/20 p-2">
                       <input
@@ -72,7 +72,6 @@ const Score = () => {
                     </label>
                   </div>
                   <table
-                    key={`${difficulty}-${gender}`}
                     ref={element => {
                       if (element) {
                         groupRefs.current[index] = element;
