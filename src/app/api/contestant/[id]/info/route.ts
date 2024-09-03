@@ -13,6 +13,7 @@ const GET = async (request: NextRequest, context: any) => {
       select: {
         number: true,
         name: true,
+        gender: true,
         difficulty: true,
       },
     });
@@ -30,6 +31,7 @@ const GET = async (request: NextRequest, context: any) => {
         number: contestantInfo.number,
         difficulty: contestantInfo.difficulty,
         name: contestantInfo.name,
+        gender: contestantInfo.gender,
       },
       {
         status: 200,

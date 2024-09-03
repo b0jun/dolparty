@@ -30,12 +30,46 @@ const GET = async (request: NextRequest, context: any) => {
           has: selectedDifficulty?.difficulty,
         },
       },
-      select: { id: true, name: true },
+      select: {
+        id: true,
+        name: true,
+        submissions: {
+          select: {
+            TopReached: true,
+            ZoneReached: true,
+            TopAttempts: true,
+            ZoneAttempts: true,
+          },
+        },
+      },
+    });
+
+    const problemsWithResults = problems.map(problem => {
+      const submission =
+        problem.submissions.length > 0
+          ? problem.submissions[0]
+          : {
+              TopReached: false,
+              ZoneReached: false,
+              TopAttempts: 0,
+              ZoneAttempts: 0,
+            };
+
+      return {
+        id: problem.id,
+        name: problem.name,
+        submission: {
+          topReached: submission.TopReached,
+          zoneReached: submission.ZoneReached,
+          topAttempts: submission.TopAttempts,
+          zoneAttempts: submission.ZoneAttempts,
+        },
+      };
     });
 
     return NextResponse.json(
       {
-        problems: problems || [],
+        problems: problemsWithResults,
       },
       {
         status: 200,

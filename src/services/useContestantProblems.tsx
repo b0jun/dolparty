@@ -4,9 +4,16 @@ import { useParams } from 'next/navigation';
 
 import { contestantKeys } from '@/lib/react-query/factory';
 
+export type Submission = {
+  topAttempts: number;
+  topReached: boolean;
+  zoneAttempts: number;
+  zoneReached: boolean;
+};
 type Problem = {
   id: number;
   name: string;
+  submission: Submission;
 };
 type BodyType = {
   problems: Problem[];
