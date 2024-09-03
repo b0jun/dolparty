@@ -25,7 +25,6 @@ model Submission {
   contestantId String
   problem      Problem    @relation(fields: [problemId], references: [id])
   problemId    Int
-  difficulty   Difficulty
   TopReached   Boolean    @default(false)
   ZoneReached  Boolean    @default(false)
   TopAttempts  Int        @default(0)

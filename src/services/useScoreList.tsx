@@ -42,6 +42,8 @@ const useScoreList = () => {
   return useQuery({
     queryKey: scoreKeys.lists(),
     queryFn,
+    refetchInterval: 10000,
+    refetchIntervalInBackground: true,
   });
 };
 

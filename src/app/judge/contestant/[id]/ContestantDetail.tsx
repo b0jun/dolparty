@@ -17,7 +17,6 @@ type Props = {
 
 const ContestantDetail = ({ number, difficulty, gender, name }: Props) => {
   const { data, isLoading, isError } = useContestantProblems();
-  console.log(data);
   const targetRef = useRef<HTMLDivElement>(null);
   const [isAtTop, setIsAtTop] = useState(false);
 
