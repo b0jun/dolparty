@@ -15,7 +15,6 @@ const bebasNeue = Bebas_Neue({ subsets: ['latin'], weight: ['400'] });
 
 const Score = () => {
   const { data } = useScoreList();
-  console.log(data);
 
   const groupRefs = useRef<HTMLTableElement[]>([]);
 
