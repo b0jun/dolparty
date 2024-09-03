@@ -16,7 +16,7 @@ type Score = {
   name: string;
   number: string;
   problems: Problem[];
-  rank: number;
+  rank: number | '-';
   totalTopAttempts: number;
   totalTops: number;
   totalZoneAttempts: number;
