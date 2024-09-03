@@ -6,6 +6,7 @@ const GET = async (request: NextRequest, context: any) => {
   try {
     const { id } = context.params;
 
+    // 해당 contestant의 difficulty 확인
     const selectedDifficulty = await prisma.contestant.findUnique({
       where: {
         id,
@@ -14,6 +15,7 @@ const GET = async (request: NextRequest, context: any) => {
         difficulty: true,
       },
     });
+
     if (!selectedDifficulty) {
       return NextResponse.json(
         { errorMessage: 'no user' },
@@ -22,18 +24,21 @@ const GET = async (request: NextRequest, context: any) => {
         },
       );
     }
-    // ex) selectedDifficulty :{ difficulty: 'D1' }
 
+    // 문제 리스트 및 해당 contestant의 submissions 가져오기
     const problems = await prisma.problem.findMany({
       where: {
         difficulties: {
-          has: selectedDifficulty?.difficulty,
+          has: selectedDifficulty.difficulty,
         },
       },
       select: {
         id: true,
         name: true,
         submissions: {
+          where: {
+            contestantId: id, // 해당 contestant의 submission만 가져오기
+          },
           select: {
             TopReached: true,
             ZoneReached: true,
@@ -47,7 +52,7 @@ const GET = async (request: NextRequest, context: any) => {
     const problemsWithResults = problems.map(problem => {
       const submission =
         problem.submissions.length > 0
-          ? problem.submissions[0]
+          ? problem.submissions[0] // 해당 contestant의 submission
           : {
               TopReached: false,
               ZoneReached: false,
