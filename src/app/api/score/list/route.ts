@@ -1,4 +1,3 @@
-/* eslint-disable no-await-in-loop */
 import { Difficulty, Gender } from '@prisma/client';
 import { NextResponse } from 'next/server';
 
@@ -48,9 +47,11 @@ async function getAllRankedContestants() {
               },
             },
           });
+
           if (contestants.length === 0) {
             return null;
           }
+
           // 참가자별 성적 계산 및 정렬
           const scoreList = contestants
             .map(contestant => {
@@ -60,24 +61,20 @@ async function getAllRankedContestants() {
               let totalZoneAttempts = 0;
 
               // 문제별 성적 초기화
-              const problemResults = problems.map(problem => ({
-                name: problem.name,
-                topAttempts: 0,
-                topReached: false,
-                zoneAttempts: 0,
-                zoneReached: false,
-              }));
+              const problemResults = problems.map(problem => {
+                // 해당 문제에 대한 submission이 있는지 확인
+                const submission = contestant.submissions.find(sub => sub.problemId === problem.id);
+
+                return {
+                  name: problem.name,
+                  topAttempts: submission?.TopAttempts ?? 0,
+                  topReached: submission?.TopReached ?? false,
+                  zoneAttempts: submission?.ZoneAttempts ?? 0,
+                  zoneReached: submission?.ZoneReached ?? false,
+                };
+              });
 
               contestant.submissions.forEach(sub => {
-                // 문제별 성적을 업데이트
-                const problem = problemResults.find(p => p.name === problems.find(pr => pr.id === sub.problemId)?.name);
-                if (problem) {
-                  problem.topAttempts = sub.TopAttempts ?? 0;
-                  problem.topReached = sub.TopReached;
-                  problem.zoneAttempts = sub.ZoneAttempts ?? 0;
-                  problem.zoneReached = sub.ZoneReached;
-                }
-
                 totalTops += sub.TopReached ? 1 : 0;
                 totalZones += sub.ZoneReached ? 1 : 0;
                 totalTopAttempts += sub.TopAttempts ?? 0;
@@ -93,9 +90,14 @@ async function getAllRankedContestants() {
                 totalTopAttempts,
                 totalZoneAttempts,
                 problems: problemResults, // 문제별 성적을 포함
+                hasSubmission: contestant.submissions.length > 0, // Submission이 있는지 여부를 체크
               };
             })
+            // 우선 Submission이 있는 참가자들을 위로 정렬, 그 다음 성적에 따라 정렬
             .sort((a, b) => {
+              if (a.hasSubmission && !b.hasSubmission) return -1;
+              if (!a.hasSubmission && b.hasSubmission) return 1;
+
               const totalTopsA = a.totalTops;
               const totalTopsB = b.totalTops;
               const totalZonesA = a.totalZones;
@@ -119,14 +121,27 @@ async function getAllRankedContestants() {
             const currentContestant = scoreList[i];
             const previousContestant = scoreList[i - 1];
 
-            // 이전 참가자와 점수 및 시도 횟수가 같다면 동일한 순위 부여
-            if (
+            // Submission이 없는 경우 rank를 '-'로 설정
+            if (!currentContestant.hasSubmission) {
+              finalScoreList.push({
+                id: currentContestant.id,
+                rank: '-',
+                number: currentContestant.number,
+                name: currentContestant.name,
+                totalTops: currentContestant.totalTops,
+                totalZones: currentContestant.totalZones,
+                totalTopAttempts: currentContestant.totalTopAttempts,
+                totalZoneAttempts: currentContestant.totalZoneAttempts,
+                problems: currentContestant.problems, // 문제별 성적을 포함
+              });
+            } else if (
               i > 0 &&
               currentContestant.totalTops === previousContestant.totalTops &&
               currentContestant.totalZones === previousContestant.totalZones &&
               currentContestant.totalTopAttempts === previousContestant.totalTopAttempts &&
               currentContestant.totalZoneAttempts === previousContestant.totalZoneAttempts
             ) {
+              // 이전 참가자와 점수 및 시도 횟수가 같다면 동일한 순위 부여
               finalScoreList.push({
                 id: currentContestant.id,
                 rank: currentRank,
@@ -174,7 +189,6 @@ async function getAllRankedContestants() {
 const GET = async () => {
   try {
     const rankedContestants = await getAllRankedContestants();
-
     return NextResponse.json(
       {
         groupedContestants: rankedContestants || [],
