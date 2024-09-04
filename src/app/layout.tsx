@@ -1,10 +1,10 @@
 import { Noto_Sans, Noto_Sans_KR } from 'next/font/google';
 
-import ReactQuery from './components/Provider/ReactQuery';
 import './globals.css';
 
 import type { Metadata } from 'next';
 
+import ReactQuery from '@/components/Provider/ReactQuery';
 import Toast from '@/components/Toast';
 
 const notoSansKr = Noto_Sans_KR({ subsets: ['latin'], weight: ['400', '500', '700', '900'] });

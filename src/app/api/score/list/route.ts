@@ -3,6 +3,9 @@ import { NextResponse } from 'next/server';
 
 import prisma from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+// https://www.prisma.io/docs/orm/more/help-and-troubleshooting/help-articles/nextjs-prisma-client-dynamic
+
 async function getAllRankedContestants() {
   const difficulties: Difficulty[] = ['D1', 'D2', 'D3', 'D4'];
   const genders: Gender[] = ['Men', 'Women'];
