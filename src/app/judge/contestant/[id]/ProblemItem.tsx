@@ -126,14 +126,16 @@ const ProblemItem = ({ id: problemId, name, submission }: Props) => {
           await queryClient.invalidateQueries({
             queryKey: contestantKeys.problems(variables.contestantId),
           });
-          toast('문제 점수가 반영되었습니다.');
+          toast('문제 점수가 반영되었습니다.', { type: 'success' });
         },
       },
     );
   };
   const onInvalid = (errors: any) => {
     if (errors.zoneAttempts.message) {
-      toast('Zone 시도 횟수는 Top 시도 횟수보다 작거나 같아야 합니다.', { type: 'error' });
+      toast('Zone 시도 횟수는 Top 시도 횟수보다 많을 수 없습니다.', {
+        type: 'warning',
+      });
     }
   };
 
@@ -164,7 +166,7 @@ const ProblemItem = ({ id: problemId, name, submission }: Props) => {
                 <div className="flex items-center">
                   <button
                     type="button"
-                    className="inline-flex size-[35px] items-center justify-center gap-x-2 rounded-md border border-black/10 bg-[#f4f4f4] text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                    className="inline-flex size-[35px] items-center justify-center gap-x-2 rounded-md border border-black/5 bg-[#f4f4f4] text-sm font-medium text-gray-800 shadow-sm outline-none transition-all duration-200 ease-in-out hover:bg-gray-50 focus:bg-gray-50 active:scale-95 active:bg-gray-300 disabled:pointer-events-none disabled:opacity-50"
                     tabIndex={-1}
                     aria-label="Decrease"
                     onClick={() => decrement('zoneAttempts')}
@@ -178,12 +180,12 @@ const ProblemItem = ({ id: problemId, name, submission }: Props) => {
                     tabIndex={-1}
                     readOnly
                     onMouseDown={e => e.preventDefault()}
-                    className="w-[60px] border-0 bg-transparent text-center text-[20px] text-gray-800 focus:ring-0 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+                    className="w-[60px] border-0 bg-transparent text-center text-[20px] text-gray-800 focus:outline-[#323232]/70 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
                     aria-roledescription="Number field"
                   />
                   <button
                     type="button"
-                    className="inline-flex size-[35px] items-center justify-center gap-x-2 rounded-md border border-black/10 bg-white/60 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                    className="inline-flex size-[35px] items-center justify-center gap-x-2 rounded-md border border-black/5 bg-[#f4f4f4] text-sm font-medium text-gray-800 shadow-sm outline-none transition-all duration-200 ease-in-out hover:bg-gray-50 focus:bg-gray-50 active:scale-95 active:bg-gray-300 disabled:pointer-events-none disabled:opacity-50"
                     tabIndex={-1}
                     aria-label="Increase"
                     onClick={() => increment('zoneAttempts')}
@@ -192,14 +194,14 @@ const ProblemItem = ({ id: problemId, name, submission }: Props) => {
                   </button>
                 </div>
               </div>
-              <label htmlFor={`zoneReached_${problemId}`} className="cursor-pointer">
+              <label htmlFor={`zoneReached_${problemId}`} className="flex cursor-pointer items-end">
                 <input
                   {...register('zoneReached')}
                   type="checkbox"
                   id={`zoneReached_${problemId}`}
                   className="peer hidden"
                 />
-                <span className="flex h-[70px] w-[70px] items-center justify-center rounded-lg rounded-tl-[50px_160px] border border-black/[0.05] bg-white/60 shadow-md peer-checked:bg-reached peer-checked:font-bold">
+                <span className="flex size-[70px] items-center justify-center rounded-lg rounded-tl-[50px_160px] border border-black/[0.05] bg-white/60 shadow-md transition-all duration-200 ease-in-out active:scale-95 active:bg-gray-300 peer-checked:bg-reached peer-checked:font-bold peer-checked:text-[#222831]">
                   Zone
                 </span>
               </label>
@@ -212,7 +214,7 @@ const ProblemItem = ({ id: problemId, name, submission }: Props) => {
                 <div className="flex items-center">
                   <button
                     type="button"
-                    className="inline-flex size-[35px] items-center justify-center gap-x-2 rounded-md border border-black/10 bg-[#f4f4f4] text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                    className="inline-flex size-[35px] items-center justify-center gap-x-2 rounded-md border border-black/5 bg-[#f4f4f4] text-sm font-medium text-gray-800 shadow-sm outline-none transition-all duration-200 ease-in-out hover:bg-gray-50 focus:bg-gray-50 active:scale-95 active:bg-gray-300 disabled:pointer-events-none disabled:opacity-50"
                     tabIndex={-1}
                     aria-label="Decrease"
                     onClick={() => decrement('topAttempts')}
@@ -231,7 +233,7 @@ const ProblemItem = ({ id: problemId, name, submission }: Props) => {
                   />
                   <button
                     type="button"
-                    className="inline-flex size-[35px] items-center justify-center gap-x-2 rounded-md border border-black/10 bg-white/60 text-sm font-medium text-gray-800 shadow-sm hover:bg-gray-50 focus:bg-gray-50 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                    className="inline-flex size-[35px] items-center justify-center gap-x-2 rounded-md border border-black/5 bg-[#f4f4f4] text-sm font-medium text-gray-800 shadow-sm outline-none transition-all duration-200 ease-in-out hover:bg-gray-50 focus:bg-gray-50 active:scale-95 active:bg-gray-300 disabled:pointer-events-none disabled:opacity-50"
                     tabIndex={-1}
                     aria-label="Increase"
                     onClick={() => increment('topAttempts')}
@@ -247,7 +249,7 @@ const ProblemItem = ({ id: problemId, name, submission }: Props) => {
                   id={`topReached_${problemId}`}
                   className="peer hidden"
                 />
-                <span className="flex h-[70px] w-[70px] items-center justify-center rounded-lg rounded-bl-[50px_160px] border border-black/[0.05] bg-white/60 shadow-md peer-checked:bg-reached peer-checked:font-bold">
+                <span className="flex size-[70px] items-center justify-center rounded-lg rounded-bl-[50px_160px] border border-black/[0.05] bg-white/60 shadow-md transition-all duration-200 ease-in-out active:scale-95 active:bg-gray-300 peer-checked:bg-reached peer-checked:font-bold peer-checked:text-[#222831]">
                   Top
                 </span>
               </label>
@@ -285,7 +287,9 @@ const ProblemItem = ({ id: problemId, name, submission }: Props) => {
                 disabled={!isDirty || isSaveLoading}
                 className={cn(
                   'mr-4 flex h-[40px] w-full items-center justify-center rounded-lg border bg-[#393E46] font-bold text-[#f7f7f7] shadow-sm',
-                  { 'opacity-50': !isDirty || isSaveLoading },
+                  !isDirty || isSaveLoading
+                    ? 'opacity-50'
+                    : 'transition-all duration-200 ease-in-out active:scale-95 active:bg-[#393E46]/60',
                 )}
               >
                 {isSaveLoading ? <Spinner /> : '저장'}
