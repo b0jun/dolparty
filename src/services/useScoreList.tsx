@@ -43,7 +43,6 @@ const useScoreList = () => {
     queryKey: scoreKeys.lists(),
     queryFn,
     refetchInterval: 10000, // 데이터 갱신 주기
-    refetchIntervalInBackground: true, // 백그라운드에서 갱신
     refetchOnWindowFocus: true, // 윈도우 포커스 시 데이터 갱신
   });
 };
