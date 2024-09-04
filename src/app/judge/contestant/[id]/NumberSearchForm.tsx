@@ -6,7 +6,7 @@ import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { PatternFormat } from 'react-number-format';
 import { z } from 'zod';
 
-import Spinner from '@/app/components/Spinner';
+import Spinner from '@/components/Spinner';
 import useContestantSearch from '@/services/useContestantSearch';
 import { SearchIcon } from '@/svg';
 

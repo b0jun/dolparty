@@ -7,7 +7,7 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { z } from 'zod';
 
-import Spinner from '@/app/components/Spinner';
+import Spinner from '@/components/Spinner';
 import { contestantKeys } from '@/lib/react-query/factory';
 import { Submission } from '@/services/useContestantProblems';
 import useSaveProblem from '@/services/useSaveProblem';
@@ -140,7 +140,12 @@ const ProblemItem = ({ id: problemId, name, submission }: Props) => {
   return (
     <li className="relative flex h-[100px] items-center overflow-hidden rounded-lg border border-black/10 bg-white/20">
       {isSaveLoading && (
-        <div className="absolute z-50 flex h-full w-full animate-pulse items-center justify-center bg-[#0a0a0a]/30" />
+        <div className="absolute z-50 flex h-full w-full items-center justify-center bg-[#0a0a0a]/20">
+          <div className="flex items-center gap-2 rounded-md bg-[#3C3D37]/100 px-4 py-3">
+            <Spinner />
+            <span className="text-white">점수가 제출되고 있습니다.</span>
+          </div>
+        </div>
       )}
       <form className="flex h-full w-full" onSubmit={handleSubmit(onSubmit, onInvalid)}>
         <div className="mr-2 flex h-full w-[90px] items-center justify-center bg-white/30 font-black">

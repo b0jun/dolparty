@@ -9,7 +9,7 @@ const contestantKeys = {
 
 const scoreKeys = {
   base: [{ scope: 'score' }] as const,
-  lists: () => [{ ...contestantKeys.base[0], entity: 'scoreList' }] as const,
+  lists: () => [{ ...scoreKeys.base[0], entity: 'scoreList' }] as const,
 };
 
 export { contestantKeys, scoreKeys };

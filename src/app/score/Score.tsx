@@ -1,5 +1,3 @@
-/* eslint-disable no-return-assign */
-
 'use client';
 
 import cn from 'classnames';
