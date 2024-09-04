@@ -42,7 +42,7 @@ const Score = () => {
                 <button
                   type="button"
                   onClick={() => scrollToGroup(index)}
-                  className="h-[50px] w-full px-2 text-left text-[14px] font-bold text-[#FEFEFE]"
+                  className="h-[50px] w-full rounded-md px-2 text-left text-[14px] font-bold text-[#FEFEFE] transition-transform duration-150 active:scale-95 active:bg-[#cccccc]/10"
                 >
                   <span className="text-[#d0d0d0]">Div. </span>
                   <span className="mr-1 text-[20px]">{difficulty}</span>
@@ -132,7 +132,7 @@ const Score = () => {
                                 {true ? (
                                   <Link
                                     href={`/judge/contestant/${id}`}
-                                    className="flex items-center gap-[6px]"
+                                    className="flex items-center gap-[8px]"
                                     // aria-disabled
                                     // tabIndex={-1}
                                   >
@@ -140,7 +140,7 @@ const Score = () => {
                                     {name}
                                   </Link>
                                 ) : (
-                                  <div className="flex items-center gap-[6px]">
+                                  <div className="flex items-center gap-[8px]">
                                     <TShirtWithNumber backNumber={number} />
                                     {name}
                                   </div>

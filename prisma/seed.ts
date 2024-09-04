@@ -82,8 +82,8 @@ async function main() {
     { number: '068', name: '남치현', difficulty: Difficulty.D3, gender: Gender.Men },
     { number: '069', name: '고동규', difficulty: Difficulty.D3, gender: Gender.Men },
     { number: '070', name: '김수완', difficulty: Difficulty.D3, gender: Gender.Men },
-    { number: '071', name: '한성현', difficulty: Difficulty.D3, gender: Gender.Men },
-    { number: '072', name: '변진호', difficulty: Difficulty.D3, gender: Gender.Men },
+    { number: '071', name: '한성현', difficulty: Difficulty.D2, gender: Gender.Men }, // D3 -> D2
+    { number: '072', name: '변진호', difficulty: Difficulty.D2, gender: Gender.Men }, // D3 -> D2
     { number: '073', name: '정국환', difficulty: Difficulty.D3, gender: Gender.Men },
     { number: '074', name: '류재상', difficulty: Difficulty.D3, gender: Gender.Men },
     { number: '075', name: '김태훈', difficulty: Difficulty.D3, gender: Gender.Men },
