@@ -32,7 +32,7 @@ const useSaveProblem = () => {
     onError: (error: AxiosError<ErrorResponse>) => {
       if (error.response) {
         const message = error.response.data?.message || '예기치 않은 오류가 발생했습니다. 다시 시도해 주세요.';
-        toast(message, { position: 'top-center' });
+        toast(message);
       } else {
         toast('예기치 않은 오류가 발생했습니다. 다시 시도해 주세요.');
       }

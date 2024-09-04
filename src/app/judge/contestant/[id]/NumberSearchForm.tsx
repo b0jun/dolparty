@@ -66,9 +66,12 @@ const NumberSearchForm = ({ isAtTop }: { isAtTop: boolean }) => {
           <button
             type="submit"
             disabled={!isSearchValid}
-            className={cn('flex items-center justify-center rounded-lg bg-[#3F4E4F] p-2', {
-              'opacity-50': !isSearchValid,
-            })}
+            className={cn(
+              'flex items-center justify-center rounded-lg bg-[#3F4E4F] p-2',
+              isSearchValid
+                ? 'transition-all duration-200 ease-in-out active:scale-95 active:bg-[#3F4E4F]/70'
+                : 'opacity-50',
+            )}
           >
             {isPending ? <Spinner /> : <SearchIcon fill={isSearchValid ? 'white' : '#aaaaaa'} width={24} height={24} />}
           </button>

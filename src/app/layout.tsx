@@ -5,6 +5,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 
 import ReactQuery from '@/components/Provider/ReactQuery';
+import TossOverlay from '@/components/Provider/TossOverlay';
 import Toast from '@/components/Toast';
 
 const notoSansKr = Noto_Sans_KR({ subsets: ['latin'], weight: ['400', '500', '700', '900'] });
@@ -30,7 +31,9 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${notoSansKr.className} ${notoSans.className}`}>
-        <ReactQuery>{children}</ReactQuery>
+        <ReactQuery>
+          <TossOverlay>{children}</TossOverlay>
+        </ReactQuery>
         <Toast />
       </body>
     </html>
