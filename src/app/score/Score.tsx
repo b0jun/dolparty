@@ -1,22 +1,57 @@
 'use client';
 
+import { useOverlay } from '@toss/use-overlay';
 import cn from 'classnames';
 import { Bebas_Neue } from 'next/font/google';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 
+import JudgeAuthModal from './JudgeAuthModal';
 import TShirtWithNumber from './TShirtWithNumber';
 
+import useAuthVerify from '@/services/useAuthVerify';
 import useScoreList from '@/services/useScoreList';
 
 const bebasNeue = Bebas_Neue({ subsets: ['latin'], weight: ['400'] });
 
 const Score = () => {
-  const { data } = useScoreList();
+  const overlay = useOverlay();
 
   const groupRefs = useRef<HTMLTableElement[]>([]);
 
+  const { data } = useScoreList();
   const [showAttempts, setShowAttempts] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
+  const { mutate } = useAuthVerify();
+
+  useEffect(() => {
+    const token = localStorage.getItem('acToken');
+    if (!token) return;
+    try {
+      mutate(
+        { acToken: token },
+        {
+          onSuccess: () => {
+            setIsAuth(true);
+          },
+        },
+      );
+    } catch (error) {
+      localStorage.removeItem('acToken');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleAuthSuccess = () => {
+    setIsAuth(true);
+    toast('인증이 완료되었습니다.', { type: 'success' });
+  };
+  const openJudgeAuthMdoal = () => {
+    overlay.open(({ isOpen, close, exit }) => (
+      <JudgeAuthModal open={isOpen} close={close} exit={exit} handleAuthSuccess={handleAuthSuccess} />
+    ));
+  };
 
   const toggleShowAttempts = () => {
     setShowAttempts(prev => !prev);
@@ -28,7 +63,16 @@ const Score = () => {
     }
   };
   return (
-    <div className="w-full bg-black/80">
+    <div className="relative w-full bg-black/80">
+      {!isAuth && (
+        <button
+          type="button"
+          onClick={openJudgeAuthMdoal}
+          className="absolute right-2 top-2 select-none p-1 text-[#2B2B2B]"
+        >
+          JUDGE
+        </button>
+      )}
       <div className="mx-auto mb-[24px] w-[1024px]">
         <div className={cn('mb-[60px] mt-[30px] flex flex-col items-center text-center')}>
           <p className={cn('text-[30px] text-[#AAAAAA]', bebasNeue.className)}>2024 DOLMENGE COMPETITION</p>
@@ -129,7 +173,7 @@ const Score = () => {
                             <td className="px-2 py-2 text-center text-[22px] font-black">{rank}</td>
                             <td className="px-2 py-2">
                               <div className="flex">
-                                {true ? (
+                                {isAuth ? (
                                   <Link
                                     href={`/judge/contestant/${id}`}
                                     className="flex items-center gap-[8px]"

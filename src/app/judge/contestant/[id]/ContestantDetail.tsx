@@ -8,6 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 import NumberSearchForm from './NumberSearchForm';
 import ProblemItem from './ProblemItem';
 
+import WithAuth from '@/components/WithAuth';
 import useContestantProblems from '@/services/useContestantProblems';
 
 type Props = {
@@ -96,14 +97,9 @@ const ContestantDetail = ({ number, difficulty, gender, name }: Props) => {
                 <ProblemItem id={id} key={id} name={name} submission={submission} />
               ))}
         </ul>
-        {/* TODO: REMOVE */}
-        {/* <ul>
-          <li>Top, Zone은 처음에 누를 수 없다. 눌렀을때 안된다고 토스트 메세지로 알림</li>
-          <li />
-        </ul> */}
       </div>
     </div>
   );
 };
 
-export default ContestantDetail;
+export default WithAuth(ContestantDetail);
