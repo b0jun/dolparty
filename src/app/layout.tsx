@@ -12,7 +12,7 @@ const notoSansKr = Noto_Sans_KR({ subsets: ['latin'], weight: ['400', '500', '70
 const notoSans = Noto_Sans({ subsets: ['latin'], weight: ['400', '700', '900'] });
 
 export const metadata: Metadata = {
-  title: '돌잔치',
+  title: '돌잔치, 2024 DOLMENGE COMPETITION',
   description: '돌잔치 랭킹현황표',
 };
 

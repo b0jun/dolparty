@@ -201,7 +201,7 @@ const ProblemItem = ({ id: problemId, name, submission }: Props) => {
                   id={`zoneReached_${problemId}`}
                   className="peer hidden"
                 />
-                <span className="flex size-[70px] items-center justify-center rounded-lg rounded-tl-[50px_160px] border border-black/[0.05] bg-white/60 shadow-md transition-all duration-200 ease-in-out active:scale-95 active:bg-gray-300 peer-checked:bg-reached peer-checked:font-bold peer-checked:text-[#222831]">
+                <span className="flex size-[70px] select-none items-center justify-center rounded-lg rounded-tl-[50px_160px] border border-black/[0.05] bg-white/60 shadow-md transition-all duration-200 ease-in-out active:scale-95 active:bg-gray-300 peer-checked:bg-reached peer-checked:font-bold peer-checked:text-[#222831]">
                   Zone
                 </span>
               </label>
@@ -249,7 +249,7 @@ const ProblemItem = ({ id: problemId, name, submission }: Props) => {
                   id={`topReached_${problemId}`}
                   className="peer hidden"
                 />
-                <span className="flex size-[70px] items-center justify-center rounded-lg rounded-bl-[50px_160px] border border-black/[0.05] bg-white/60 shadow-md transition-all duration-200 ease-in-out active:scale-95 active:bg-gray-300 peer-checked:bg-reached peer-checked:font-bold peer-checked:text-[#222831]">
+                <span className="flex size-[70px] select-none items-center justify-center rounded-lg rounded-bl-[50px_160px] border border-black/[0.05] bg-white/60 shadow-md transition-all duration-200 ease-in-out active:scale-95 active:bg-gray-300 peer-checked:bg-reached peer-checked:font-bold peer-checked:text-[#222831]">
                   Top
                 </span>
               </label>
