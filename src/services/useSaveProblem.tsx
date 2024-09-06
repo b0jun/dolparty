@@ -46,7 +46,7 @@ const useSaveProblem = () => {
         const message = error.response.data?.message || '예기치 않은 오류가 발생했습니다. 다시 시도해 주세요.';
         if (message === 'TokenExpiredError' || message === 'JsonWebTokenError') {
           localStorage.removeItem('acToken');
-          router.replace('/score');
+          router.replace('/score/live?difficulty=D1');
           toast('토큰이 만료되었습니다.');
           return;
         }
