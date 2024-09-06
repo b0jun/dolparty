@@ -146,7 +146,126 @@ const LiveScore = () => {
           <div className="w-[1000px]">
             <div className="flex flex-col gap-[100px]">
               {isLoading ? (
-                <div />
+                <div className="relative">
+                  <div className="absolute -top-[50px] right-0 z-50 flex justify-end">
+                    <div className="inline-flex items-center rounded-lg bg-black/20 p-2">
+                      <div className="peer relative h-[22px] w-[40px] rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-[18px] after:w-[18px] after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-[#F4CD5F] peer-checked:after:translate-x-full peer-checked:after:border-white peer-focus:ring-2 peer-focus:ring-[#F4CD5F]/30 rtl:peer-checked:after:-translate-x-full" />
+                      <span className="ms-2 text-sm font-medium text-white/50">Show Attempts of Problems</span>
+                    </div>
+                  </div>
+                  <table className="mx-auto w-full table-fixed select-none rounded-xl bg-[#202020] text-[#FEFEFE] shadow-md">
+                    <colgroup>
+                      <col width={70} />
+                      <col />
+                      {new Array(10).fill(0).map((_, index) => (
+                        <col key={index} width={50} />
+                      ))}
+                      <col width={58} />
+                      <col width={58} />
+                      <col width={58} />
+                      <col width={58} />
+                    </colgroup>
+                    <thead className="z-[9999] bg-[#4D4D4D]">
+                      <tr className="h-[35px] bg-[#4D4D4D] text-[#F9F7F7]">
+                        <th className="rounded-tl-lg px-2 text-left text-[14px]" colSpan={2}>
+                          <div className="h-[25px] w-[100px] animate-pulse rounded-md bg-[#aaa]/40" />
+                        </th>
+                        <th colSpan={10} className="text-left">
+                          <div className="h-[25px] w-[100px] animate-pulse rounded-md bg-[#aaa]/40" />
+                        </th>
+                        <th />
+                        <th />
+                        <th colSpan={2} className="rounded-tr-lg text-center text-[#a0a0a0]">
+                          <div className="flex justify-center">
+                            <div className="h-[25px] w-[80px] animate-pulse rounded-md bg-[#aaa]/40" />
+                          </div>
+                        </th>
+                      </tr>
+                      <tr className="bg-[#4D4D4D] text-[#F9F7F7]">
+                        <th className="w-[50px] px-2 py-2">
+                          <div className="h-[24px] w-[40px] animate-pulse rounded-md bg-[#aaa]/40" />
+                        </th>
+                        <th className="w-[200px] px-2 py-2 text-left">
+                          <div className="h-[24px] w-[40px] animate-pulse rounded-md bg-[#aaa]/40" />
+                        </th>
+                        {new Array(10).fill(0).map((_, index) => (
+                          <th key={index}>
+                            <div className="flex items-center justify-center">
+                              <div className="h-[24px] w-[28px] animate-pulse rounded-md bg-[#aaa]/40" />
+                            </div>
+                          </th>
+                        ))}
+                        <th className="w-[60px] px-2">
+                          <div className="h-[30px] w-[40px] animate-pulse rounded-md bg-[#aaa]/40" />
+                        </th>
+                        <th className="w-[60px] px-2">
+                          <div className="h-[30px] w-[40px] animate-pulse rounded-md bg-[#aaa]/40" />
+                        </th>
+                        <th className="w-[60px] px-2 text-[#a0a0a0]">
+                          <div className="h-[30px] w-[40px] animate-pulse rounded-md bg-[#aaa]/40" />
+                        </th>
+                        <th className="w-[60px] px-2 text-[#a0a0a0]">
+                          <div className="h-[30px] w-[40px] animate-pulse rounded-md bg-[#aaa]/40" />
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {new Array(10).fill(0).map((_, index) => (
+                        <tr key={index}>
+                          <td className="px-2 py-2 text-center text-[22px] font-black">
+                            <div className="flex justify-center">
+                              <div className="h-[30px] w-[30px] animate-pulse rounded-md bg-[#aaa]/40" />
+                            </div>
+                          </td>
+                          <td className="px-2 py-2">
+                            <div className="flex">
+                              <div className="flex animate-pulse items-center gap-[12px]">
+                                <TShirtWithNumber backNumber="" />
+                                <div className="h-[30px] w-[50px] rounded-md bg-[#aaa]/40" />
+                              </div>
+                            </div>
+                          </td>
+                          {new Array(10).fill(0).map((_, index) => (
+                            <td key={index} className="px-1 py-2 text-center text-[#202020]">
+                              <div className="flex flex-col items-center gap-[3px] text-[15px] font-medium">
+                                <div
+                                  className={cn(
+                                    'flex size-[35px] animate-pulse items-center justify-center rounded-[2px] bg-black/80',
+                                  )}
+                                />
+                                <div
+                                  className={cn(
+                                    'flex size-[35px] animate-pulse items-center justify-center rounded-[2px] bg-black/80',
+                                  )}
+                                />
+                              </div>
+                            </td>
+                          ))}
+                          <td className="px-2 py-2 text-center font-black">
+                            <div className="flex justify-center">
+                              <div className="h-[30px] w-[30px] animate-pulse rounded-md bg-[#aaa]/40" />
+                            </div>
+                          </td>
+                          <td className="px-2 py-2 text-center font-black">
+                            <div className="flex justify-center">
+                              <div className="h-[30px] w-[30px] animate-pulse rounded-md bg-[#aaa]/40" />
+                            </div>
+                          </td>
+                          <td className="px-2 py-2 text-center font-black text-[#909090]">
+                            <div className="flex justify-center">
+                              <div className="h-[30px] w-[30px] animate-pulse rounded-md bg-[#aaa]/40" />
+                            </div>
+                          </td>
+                          <td className="px-2 py-2 text-center font-black text-[#909090]">
+                            <div className="flex justify-center">
+                              <div className="h-[30px] w-[30px] animate-pulse rounded-md bg-[#aaa]/40" />
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
               ) : (
                 data?.groupedContestants?.map(({ difficulty, gender, problems, scoreList }, index: number) => (
                   <div key={`${difficulty}-${gender}`} className="relative">
@@ -251,7 +370,7 @@ const LiveScore = () => {
                                   <div className="flex flex-col items-center gap-[3px] text-[16px] font-bold">
                                     <div
                                       className={cn(
-                                        'flex size-[35px] items-center justify-center rounded-[2px] bg-black',
+                                        'flex size-[35px] items-center justify-center rounded-[2px]',
                                         topReached ? 'bg-reached text-[#202020]' : 'bg-black text-black',
                                       )}
                                     >
@@ -259,7 +378,7 @@ const LiveScore = () => {
                                     </div>
                                     <div
                                       className={cn(
-                                        'flex size-[35px] items-center justify-center rounded-[2px] bg-black',
+                                        'flex size-[35px] items-center justify-center rounded-[2px]',
                                         zoneReached ? 'bg-reached text-[#202020]' : 'bg-black text-black',
                                       )}
                                     >
