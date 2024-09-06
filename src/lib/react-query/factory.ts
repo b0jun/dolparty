@@ -10,6 +10,8 @@ const contestantKeys = {
 const scoreKeys = {
   base: [{ scope: 'score' }] as const,
   lists: () => [{ ...scoreKeys.base[0], entity: 'scoreList' }] as const,
+  liveScoreLists: () => [{ ...scoreKeys.base[0], entity: 'liveScoreList' }] as const,
+  liveScoreList: (difficulty: Difficulty) => [{ ...scoreKeys.liveScoreLists()[0], difficulty }] as const,
 };
 
 export { contestantKeys, scoreKeys };

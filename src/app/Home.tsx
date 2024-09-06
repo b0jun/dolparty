@@ -1,20 +1,25 @@
 'use client';
 
+import { useOverlay } from '@toss/use-overlay';
 import cn from 'classnames';
 import { Bebas_Neue } from 'next/font/google';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 
+import SelectDifficultyModal from './SelectDifficultyModal';
+
+import Modal from '@/components/Modal';
 import useContestantList from '@/services/useContestantList';
 
 const bebasNeue = Bebas_Neue({ subsets: ['latin'], weight: ['400'] });
-
+export const DIFFICULTY_LIST = ['D1', 'D2', 'D3', 'D4'];
 export default function Home() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
-  const difficultyList = ['all', 'D1', 'D2', 'D3', 'D4'];
-  const currentType = searchParams.get('type') || 'all';
+  const overlay = useOverlay();
+  const difficultyList = ['all', ...DIFFICULTY_LIST];
+  const currentType = searchParams.get('difficulty') || 'all';
 
   const headerRef = useRef<HTMLTableRowElement>(null);
   const [isScrollTop, setIsScrollTop] = useState(false);
@@ -36,7 +41,19 @@ export default function Home() {
   }, []);
 
   const { data, isLoading } = useContestantList();
-
+  const openSelectDifficulty = () => {
+    overlay.open(({ isOpen, close, exit }) => (
+      <SelectDifficultyModal
+        open={isOpen}
+        onClose={() => {
+          close();
+          setTimeout(() => {
+            exit();
+          }, 200);
+        }}
+      />
+    ));
+  };
   return (
     <main className="flex min-h-full min-w-[576px] flex-col bg-backdrop bg-cover bg-fixed bg-center bg-no-repeat">
       <section className="flex flex-1">
@@ -59,7 +76,7 @@ export default function Home() {
                       pathname,
                       ...(item !== 'all' && {
                         query: {
-                          type: item,
+                          difficulty: item,
                         },
                       }),
                     }}
@@ -75,12 +92,13 @@ export default function Home() {
               ))}
             </ul>
             <div>
-              <Link
-                href="/score"
+              <button
+                type="button"
+                onClick={openSelectDifficulty}
                 className="flex h-[35px] items-center rounded-lg bg-gray-500/30 px-2 text-[14px] font-medium transition-all hover:bg-gray-500/50"
               >
                 실시간 점수 조회
-              </Link>
+              </button>
             </div>
           </div>
           <table className="text-md mx-auto mb-4 w-full table-fixed rounded-lg bg-white/50 shadow-md">

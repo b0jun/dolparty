@@ -13,7 +13,7 @@ const WithAuth = <P extends object>(WrappedComponent: ComponentType<P>) => {
     useEffect(() => {
       const token = localStorage.getItem('acToken');
       if (!token) {
-        router.replace('/score');
+        router.replace('/score/live?difficulty=D1');
       }
       try {
         mutate(
@@ -21,13 +21,13 @@ const WithAuth = <P extends object>(WrappedComponent: ComponentType<P>) => {
           {
             onError: (e: any) => {
               localStorage.removeItem('acToken');
-              router.replace('/score');
+              router.replace('/score/live?difficulty=D1');
             },
           },
         );
       } catch (error) {
         localStorage.removeItem('acToken');
-        router.replace('/score');
+        router.replace('/score/live?difficulty=D1');
       }
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);

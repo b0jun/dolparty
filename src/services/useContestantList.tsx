@@ -23,7 +23,7 @@ const queryFn = async ({ queryKey }: QueryFunctionContext<ReturnType<typeof cont
 
 const useContestantList = () => {
   const searchParams = useSearchParams();
-  const difficulty = searchParams.get('type') as Difficulty | null;
+  const difficulty = searchParams.get('difficulty') as Difficulty | null;
 
   return useQuery({
     queryKey: contestantKeys.list(difficulty),

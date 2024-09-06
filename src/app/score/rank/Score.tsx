@@ -10,7 +10,6 @@ import { toast } from 'react-toastify';
 import JudgeAuthModal from './JudgeAuthModal';
 import TShirtWithNumber from './TShirtWithNumber';
 
-import Spinner from '@/components/Spinner';
 import useAuthVerify from '@/services/useAuthVerify';
 import useScoreList from '@/services/useScoreList';
 
@@ -77,7 +76,7 @@ const Score = () => {
       <div className="mx-auto mb-[24px] w-[1024px]">
         <div className={cn('mb-[60px] mt-[30px] flex flex-col items-center text-center')}>
           <p className={cn('text-[30px] text-[#AAAAAA]', bebasNeue.className)}>2024 DOLMENGE COMPETITION</p>
-          <p className={cn('text-[66px]/[60px] text-[#F6F6F6]', bebasNeue.className)}>Live Score</p>
+          <p className={cn('text-[66px]/[60px] text-[#F6F6F6]', bebasNeue.className)}>Ranking</p>
           <p className={cn('rounded-lg bg-white/10 px-2 text-[30px]/[40px] font-medium text-[#AAAAAA]')}>돌잔치</p>
         </div>
         <div className="flex justify-center gap-[16px] px-4">
@@ -298,12 +297,7 @@ const Score = () => {
                               <td className="px-2 py-2">
                                 <div className="flex">
                                   {isAuth ? (
-                                    <Link
-                                      href={`/judge/contestant/${id}`}
-                                      className="flex items-center gap-[8px]"
-                                      // aria-disabled
-                                      // tabIndex={-1}
-                                    >
+                                    <Link href={`/judge/contestant/${id}`} className="flex items-center gap-[8px]">
                                       <TShirtWithNumber backNumber={number} />
                                       {name}
                                     </Link>

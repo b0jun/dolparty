@@ -1,6 +1,7 @@
 import { Difficulty, Gender } from '@prisma/client';
-import { useQuery } from '@tanstack/react-query';
+import { QueryFunctionContext, useQuery } from '@tanstack/react-query';
 import axios, { AxiosResponse } from 'axios';
+import { useSearchParams } from 'next/navigation';
 
 import { scoreKeys } from '@/lib/react-query/factory';
 
@@ -33,18 +34,22 @@ type BodyType = {
   groupedContestants: groupedContestant[];
 };
 
-const queryFn = async () => {
-  const response: AxiosResponse<BodyType> = await axios('/api/score/list');
+const queryFn = async ({ queryKey }: QueryFunctionContext<ReturnType<typeof scoreKeys.liveScoreList>>) => {
+  const { difficulty } = queryKey[0];
+  const response: AxiosResponse<BodyType> = await axios('/api/score/live', { params: { difficulty } });
   return response.data;
 };
 
-const useScoreList = () => {
+const useLiveScore = () => {
+  const searchParams = useSearchParams();
+  const difficulty = searchParams.get('difficulty');
   return useQuery({
-    queryKey: scoreKeys.lists(),
+    queryKey: scoreKeys.liveScoreList(difficulty as Difficulty),
     queryFn,
-    refetchInterval: 30000, // 데이터 갱신 주기
+    enabled: !!difficulty,
+    refetchInterval: 60000, // 데이터 갱신 주기
     refetchOnWindowFocus: true, // 윈도우 포커스 시 데이터 갱신
   });
 };
 
-export default useScoreList;
+export default useLiveScore;
