@@ -3,6 +3,7 @@
 import { Difficulty, Gender } from '@prisma/client';
 import cn from 'classnames';
 import { Lobster } from 'next/font/google';
+import Link from 'next/link';
 import { useEffect, useRef, useState } from 'react';
 
 import NumberSearchForm from './NumberSearchForm';
@@ -10,6 +11,7 @@ import ProblemItem from './ProblemItem';
 
 import WithAuth from '@/components/WithAuth';
 import useContestantProblems from '@/services/useContestantProblems';
+import { BackIcon } from '@/svg';
 
 type Props = {
   number: string;
@@ -24,7 +26,6 @@ const ContestantDetail = ({ number, difficulty, gender, name }: Props) => {
   const { data, isLoading, isError } = useContestantProblems();
   const targetRef = useRef<HTMLDivElement>(null);
   const [isAtTop, setIsAtTop] = useState(false);
-
   const handleScroll = () => {
     if (targetRef.current) {
       const rect = targetRef.current.getBoundingClientRect();
@@ -40,7 +41,12 @@ const ContestantDetail = ({ number, difficulty, gender, name }: Props) => {
   }, []);
 
   return (
-    <div className="mx-auto w-[1024px] min-w-[768px] bg-white/50 px-[16px] py-[24px]">
+    <div className="relative mx-auto w-[1024px] min-w-[768px] bg-white/50 px-[16px] py-[24px]">
+      <div className="absolute left-4 top-6">
+        <Link href={`/score/live?difficulty=${difficulty}`} className="flex p-[2px]">
+          <BackIcon width={28} height={28} fill="#00000099" />
+        </Link>
+      </div>
       <NumberSearchForm isAtTop={isAtTop} />
       <div
         ref={targetRef}
