@@ -64,7 +64,7 @@ const Score = () => {
   };
   return (
     <div className="relative w-full bg-black/80">
-      {!isAuth && (
+      {/* {!isAuth && (
         <button
           type="button"
           onClick={openJudgeAuthMdoal}
@@ -72,7 +72,7 @@ const Score = () => {
         >
           JUDGE
         </button>
-      )}
+      )} */}
       <div className="mx-auto mb-[24px] w-[1024px]">
         <div className={cn('mb-[60px] mt-[30px] flex flex-col items-center text-center')}>
           <p className={cn('text-[30px] text-[#AAAAAA]', bebasNeue.className)}>2024 DOLMENGE COMPETITION</p>
