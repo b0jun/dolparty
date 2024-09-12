@@ -9,7 +9,6 @@ import { useEffect, useRef, useState } from 'react';
 
 import SelectDifficultyModal from './SelectDifficultyModal';
 
-import Modal from '@/components/Modal';
 import useContestantList from '@/services/useContestantList';
 
 const bebasNeue = Bebas_Neue({ subsets: ['latin'], weight: ['400'] });
