@@ -26,7 +26,7 @@ input[type='number'] {
   border-radius: 15px;
   background-color: #e0e0e0;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 약간의 그림자 효과 추가 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 .custom-checkbox input[type='checkbox'] {
