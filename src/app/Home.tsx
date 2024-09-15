@@ -13,6 +13,7 @@ import useContestantList from '@/services/useContestantList';
 
 const bebasNeue = Bebas_Neue({ subsets: ['latin'], weight: ['400'] });
 export const DIFFICULTY_LIST = ['D1', 'D2', 'D3', 'D4'];
+
 export default function Home() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
