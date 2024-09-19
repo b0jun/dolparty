@@ -54,9 +54,9 @@ input[type='number'] {
 /* 모바일 기기용 미디어 쿼리 */
 @media (max-width: 600px) {
   .custom-checkbox {
-    width: 120px; /* 모바일에서 버튼 크기 증가 */
+    width: 120px;
     height: 120px;
     line-height: 120px;
-    font-size: 1.2rem; /* 폰트 크기 약간 축소 */
+    font-size: 1.2rem;
   }
 }
