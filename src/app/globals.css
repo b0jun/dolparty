@@ -51,7 +51,6 @@ input[type='number'] {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-/* 모바일 기기용 미디어 쿼리 */
 @media (max-width: 600px) {
   .custom-checkbox {
     width: 120px;
